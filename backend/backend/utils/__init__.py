@@ -1,1 +1,0 @@
-# Pacote utils para processamento de imagens e OCR 
