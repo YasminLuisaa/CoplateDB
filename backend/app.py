@@ -191,7 +191,7 @@ def process_image(image_path, method="original"):
 
             for (bbox, text, prob) in results:
                 clean_text = clean_plate_text(text)
-                
+
                 # Se tem mais de 6 caracteres, considere como um possível candidato
                 if len(clean_text) >= 6 and prob > best_confidence:
                     best_text = clean_text
@@ -256,11 +256,16 @@ def detect_plate():
         file.save(file_path)
 
         # Obter configurações
-        use_original = request.form.get('use_original', 'true').lower() == 'true'
-        use_perspective = request.form.get('use_perspective', 'false').lower() == 'true'
-        use_rotation = request.form.get('use_rotation', 'false').lower() == 'true'
-        use_enhanced = request.form.get('use_enhanced', 'false').lower() == 'true'
-        use_all_methods = request.form.get('use_all_methods', 'false').lower() == 'true'
+        use_original = request.form.get(
+            'use_original', 'true').lower() == 'true'
+        use_perspective = request.form.get(
+            'use_perspective', 'false').lower() == 'true'
+        use_rotation = request.form.get(
+            'use_rotation', 'false').lower() == 'true'
+        use_enhanced = request.form.get(
+            'use_enhanced', 'false').lower() == 'true'
+        use_all_methods = request.form.get(
+            'use_all_methods', 'false').lower() == 'true'
 
         if use_all_methods:
             use_original = use_perspective = use_rotation = use_enhanced = True
@@ -330,7 +335,7 @@ def list_images():
         for filename in os.listdir(app.config['UPLOADS_FOLDER']):
             if allowed_file(filename):
                 images.append(filename)
-        
+
         return jsonify({
             "success": True,
             "images": images
@@ -361,7 +366,7 @@ def check_system():
         "upload_dir": os.path.exists(UPLOAD_FOLDER) and os.access(UPLOAD_FOLDER, os.W_OK),
         "processed_dir": os.path.exists(PROCESSED_FOLDER) and os.access(PROCESSED_FOLDER, os.W_OK)
     }
-    
+
     return jsonify({
         "success": True,
         "components": components,
@@ -379,4 +384,4 @@ def serve_react(path):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0') 
+    app.run(debug=True)
