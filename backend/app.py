@@ -420,24 +420,22 @@ if __name__ == '__main__':
     if not os.path.exists(template_path):
         print(
             f"ALERTA: Arquivo de template index.html não encontrado em {template_path}")
-        print("Execute o setup.py para configurar os diretórios corretamente ou mova o arquivo HTML para a pasta templates/")
-
-    # Verificar se o arquivo JavaScript existe
+        print("Execute o setup.py para configurar os diretórios corretamente ou mova o arquivo HTML para a pasta templates/")    # Verificar se o arquivo JavaScript existe
     js_path = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'static', 'js', 'main.js')
     if not os.path.exists(js_path):
-        print(
-            f"ALERTA: Arquivo JavaScript main.js não encontrado em {js_path}")
+        print(f"ALERTA: Arquivo JavaScript main.js não encontrado em {js_path}")
         print("Execute o setup.py ou crie o diretório static/js/ e mova o arquivo main.js para esta pasta.")
-
-    print("Iniciando servidor Flask na porta 5000...")
+        
+    print("Iniciando servidor Flask...")
     print("Acesse http://localhost:1000 no seu navegador")
+    
     try:
-        app.run(debug=True, host='0.0.0.0', port=1000)
+        # Usar a porta do ambiente de produção ou 1000 como fallback
+        port = int(os.environ.get('PORT', 1000))
+        app.run(debug=True, host='0.0.0.0', port=port)
     except Exception as e:
         print(f"ERRO ao iniciar o servidor Flask: {str(e)}")
 
-# Configuração para produção (Render)
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+# Fim do arquivo
+port = int(os.environ.get('PORT', 5000))
