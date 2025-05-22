@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask_cors import CORS
 import os
 import uuid
 import re
@@ -13,6 +14,18 @@ print("Iniciando aplicação...")
 
 # Inicializar a aplicação Flask
 app = Flask(__name__, static_folder='static', template_folder='templates')
+
+# Habilitar CORS para todas as rotas - permitir frontend Vercel
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "*",
+            "https://coplate-db-ifsp.vercel.app",
+            "http://localhost:3000",
+            "http://localhost:5173"
+        ]
+    }
+})
 
 # Configurações
 UPLOAD_FOLDER = os.path.join(os.path.dirname(
@@ -237,6 +250,19 @@ def process_image(image_path, method="original"):
         }
 
 
+# Rota de health check para monitoramento
+@app.route('/health', methods=['GET'])
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Health check para Render.com"""
+    return jsonify({
+        "status": "ok",
+        "message": "CoPlateDB Backend está funcionando!",
+        "platform": "render",
+        "easyocr_status": "loaded" if reader is not None else "error"
+    })
+
+
 @app.route('/')
 def index():
     """Rota para a página inicial"""
@@ -249,7 +275,15 @@ def index():
         template_path = os.path.join(os.path.dirname(
             os.path.abspath(__file__)), 'templates', 'index.html')
         if not os.path.exists(template_path):
-            return f"Arquivo index.html não encontrado em {template_path}. Por favor, certifique-se de que o arquivo foi movido para a pasta templates."
+            return jsonify({
+                "message": "CoPlateDB Backend API",
+                "status": "running",
+                "endpoints": [
+                    "/api/health",
+                    "/api/detect",
+                    "/check-system"
+                ]
+            })
         return f"Erro ao renderizar página: {e}"
 
 
@@ -407,35 +441,27 @@ def check_system():
         "template_dir": os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')),
         "index_file": os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates', 'index.html')),
         "static_dir": os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')),
-        "js_file": os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'js', 'main.js'))
+        "js_file": os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'js', 'main.js')),
+        "environment": "render"
     }
 
     return jsonify(status)
 
 
 if __name__ == '__main__':
-    # Verificar se o template existe
-    template_path = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'templates', 'index.html')
-    if not os.path.exists(template_path):
-        print(
-            f"ALERTA: Arquivo de template index.html não encontrado em {template_path}")
-        print("Execute o setup.py para configurar os diretórios corretamente ou mova o arquivo HTML para a pasta templates/")    # Verificar se o arquivo JavaScript existe
-    js_path = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'static', 'js', 'main.js')
-    if not os.path.exists(js_path):
-        print(f"ALERTA: Arquivo JavaScript main.js não encontrado em {js_path}")
-        print("Execute o setup.py ou crie o diretório static/js/ e mova o arquivo main.js para esta pasta.")
-        
-    print("Iniciando servidor Flask...")
-    print("Acesse http://localhost:1000 no seu navegador")
+    print("Iniciando servidor Flask para Render.com...")
+    
+    # Para Render.com - usar PORT do ambiente
+    port = int(os.environ.get('PORT', 10000))
+    
+    print(f"Servidor rodando na porta: {port}")
     
     try:
-        # Usar a porta do ambiente de produção ou 1000 como fallback
-        port = int(os.environ.get('PORT', 1000))
-        app.run(debug=True, host='0.0.0.0', port=port)
+        # Configuração para produção no Render
+        app.run(
+            debug=False,  # Desabilitar debug em produção
+            host='0.0.0.0',
+            port=port
+        )
     except Exception as e:
         print(f"ERRO ao iniciar o servidor Flask: {str(e)}")
-
-# Fim do arquivo
-port = int(os.environ.get('PORT', 5000))
