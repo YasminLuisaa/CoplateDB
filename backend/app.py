@@ -450,12 +450,12 @@ def check_system():
 
 if __name__ == '__main__':
     print("Iniciando servidor Flask para Render.com...")
-    
+
     # Para Render.com - usar PORT do ambiente
-    port = int(os.environ.get('PORT', 10000))
-    
+    port = int(os.environ.get('PORT', 1000))
+
     print(f"Servidor rodando na porta: {port}")
-    
+
     try:
         # Configuração para produção no Render
         app.run(
