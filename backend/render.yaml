@@ -5,10 +5,10 @@ services:
     region: oregon
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: gunicorn app:app
     healthCheckPath: /health
     envVars:
       - key: PORT
-        value: 10000
+        value: 1000
       - key: PYTHONUNBUFFERED
         value: 1
