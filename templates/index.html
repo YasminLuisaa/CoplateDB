@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Detecção de Placas Mercosul</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        /* Cores baseadas nas placas Mercosul */
+        --primary: #003399; /* Azul Mercosul */
+        --primary-dark: #002266;
+        --primary-light: #e6f0ff;
+        --secondary: #008542; /* Verde Mercosul */
+        --secondary-dark: #006633;
+        --warning: #ffd700; /* Amarelo Mercosul */
+        --white: #ffffff;
+        --black: #000000;
+        --light: #f6f8fa;
+        --dark: #24292e;
+        --danger: #d73a49;
+        --info: #58a6ff;
+        --text: #24292e;
+        --text-muted: #6a737d;
+        --border: #e1e4e8;
+        --success-bg: rgba(0, 133, 66, 0.1);
+        --danger-bg: rgba(215, 58, 73, 0.1);
+        --info-bg: rgba(0, 51, 153, 0.1);
+        --warning-bg: rgba(255, 215, 0, 0.1);
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+          0 1px 3px rgba(0, 0, 0, 0.1);
+        --tooltip-bg: rgba(0, 0, 0, 0.8);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: var(--light);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .code-font {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Header */
+      header {
+        background: var(--primary);
+        color: white;
+        padding: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background-color: var(--warning);
+        border-radius: 4px;
+        margin-right: 12px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .logo h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+
+      /* Status bar - Regra 3: Feedback informativo */
+      .status-bar {
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .status-bar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--secondary);
+      }
+
+      /* Main Container */
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 2rem;
+      }
+
+      @media (max-width: 992px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Cards */
+      .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .card-header {
+        padding: 1rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        border-bottom: 1px solid var(--border);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .card-header .badge {
+        background-color: white;
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      /* Feedback de progresso - Regra 3: Feedback informativo e Regra 4: Diálogos com fim claro */
+      .progress-steps {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0 2rem;
+        position: relative;
+      }
+
+      .progress-steps::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--border);
+        z-index: 1;
+      }
+
+      .step {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 25%;
+      }
+
+      .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-text {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .step.active .step-number {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .step.active .step-text {
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .step.completed .step-number {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+        color: white;
+      }
+
+      .step.completed .step-text {
+        color: var(--secondary);
+      }
+
+      /* Form Styling */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      .file-input-container {
+        position: relative;
+        width: 100%;
+        height: 180px;
+        border: 2px dashed var(--primary);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .file-input-container:hover {
+        border-color: var(--secondary);
+        background-color: rgba(0, 133, 66, 0.05);
+      }
+
+      .file-input-container:focus-within {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.25);
+      }
+
+      .file-input-container.has-file {
+        border-style: solid;
+        border-color: var(--secondary);
+      }
+
+      /* Input de arquivo modificado */
+      .file-input-wrapper {
+        margin-top: 15px;
+      }
+
+      .upload-button {
+        background-color: var(--primary);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: inline-block;
+        transition: background-color 0.2s;
+      }
+
+      .upload-button:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .file-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .file-instructions {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 0 1rem;
+      }
+
+      .file-preview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 0.5rem;
+        background-color: white;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .file-preview.active {
+        opacity: 1;
+      }
+
+      .file-name {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 500;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 4px;
+      }
+
+      .file-format-info {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-align: center;
+      }
+
+      .options-container {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: var(--primary-light);
+        border-radius: 6px;
+      }
+
+      .option-group {
+        margin-bottom: 1rem;
+      }
+
+      .option-group-title {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: var(--secondary);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      /* Estilizando botões - Regra 7: Suporte ao controle interno */
+      button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-width: 120px;
+      }
+
+      button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.25);
+      }
+
+      button:disabled {
+        background: var(--border);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      button.secondary {
+        background: white;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
+
+      button.secondary:hover {
+        background: var(--primary-light);
+        border-color: var(--primary-dark);
+      }
+
+      button.success {
+        background: var(--secondary);
+      }
+
+      button.success:hover {
+        background: var(--secondary-dark);
+      }
+
+      /* Loading animation - Regra 3: Feedback informativo */
+      .loading-container {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        gap: 1rem;
+      }
+
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(0, 51, 153, 0.2);
+        border-left-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 1rem;
+        color: var(--primary);
+        text-align: center;
+      }
+
+      .loading-progress {
+        width: 100%;
+        max-width: 300px;
+        height: 6px;
+        background-color: var(--border);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+
+      .loading-progress-bar {
+        height: 100%;
+        background-color: var(--primary);
+        width: 0;
+        border-radius: 3px;
+        animation: progress 2s ease-in-out infinite;
+      }
+
+      @keyframes progress {
+        0% {
+          width: 0;
+        }
+        50% {
+          width: 70%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* Results Section */
+      .results-container {
+        display: none;
+      }
+
+      .results-container.active {
+        display: block;
+      }
+
+      .algorithm-comparison {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .algorithm-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+        border-top: 4px solid var(--primary);
+      }
+
+      .algorithm-header {
+        padding: 1rem;
+        background-color: var(--primary-light);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .algorithm-title {
+        font-weight: 500;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .algorithm-body {
+        padding: 1rem;
+      }
+
+      .algorithm-confidence {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      .confidence-bar {
+        height: 8px;
+        background-color: var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 4px;
+      }
+
+      .confidence-fill {
+        height: 100%;
+        background-color: var(--secondary);
+      }
+
+      .result-image {
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        margin-bottom: 1rem;
+      }
+
+      .result-image-container {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+
+      .image-controls {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .image-control-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: var(--primary);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .image-control-btn:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      /* Plates Display - Regra 1: Consistência */
+      .plates-container {
+        margin-top: 1rem;
+      }
+
+      .plate-item {
+        background-color: var(--primary-light);
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        border-left: 4px solid var(--primary);
+        transition: all 0.2s;
+      }
+
+      .plate-item:hover {
+        transform: translateX(4px);
+      }
+
+      /* Versão estilizada da placa do Mercosul */
+      .mercosul-plate {
+        background: white;
+        border: 2px solid var(--primary);
+        border-radius: 4px;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        position: relative;
+        font-family: "JetBrains Mono", monospace;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 0.75rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mercosul-plate::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: var(--primary);
+        border-radius: 2px 2px 0 0;
+      }
+
+      .plate-number {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--dark);
+      }
+
+      .plate-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .plate-confidence-display {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .confidence-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--primary);
+      }
+
+      .plate-method {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .method-icon {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .icon-original {
+        background-color: var(--primary);
+      }
+
+      .icon-rotation {
+        background-color: var(--secondary);
+      }
+
+      .icon-perspective {
+        background-color: var(--warning);
+      }
+
+      .icon-enhanced {
+        background-color: var(--info);
+      }
+
+      /* Comparison Table - Regra 8: Reduzir carga de memória */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .comparison-table th {
+        background-color: var(--primary-light);
+        font-weight: 600;
+        color: var(--primary);
+        position: sticky;
+        top: 0;
+      }
+
+      .comparison-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .comparison-table tr:hover td {
+        background-color: var(--primary-light);
+      }
+
+      /* Alert Banner - Regra 3: Feedback informativo, Regra 5: Prevenção de erros */
+      .alert-banner {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .alert-banner-icon {
+        flex-shrink: 0;
+        font-size: 1.2rem;
+      }
+
+      .alert-banner-text {
+        flex-grow: 1;
+        font-size: 0.9rem;
+      }
+
+      .alert-banner-close {
+        flex-shrink: 0;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+      }
+
+      .alert-banner-close:hover {
+        opacity: 1;
+      }
+
+      .alert-info {
+        background-color: var(--info-bg);
+        color: var(--primary);
+        border-left: 4px solid var(--primary);
+      }
+
+      .alert-warning {
+        background-color: var(--warning-bg);
+        color: #806600;
+        border-left: 4px solid var(--warning);
+      }
+
+      .alert-success {
+        background-color: var(--success-bg);
+        color: var(--secondary);
+        border-left: 4px solid var(--secondary);
+      }
+
+      .alert-error {
+        background-color: var(--danger-bg);
+        color: var(--danger);
+        border-left: 4px solid var(--danger);
+      }
+
+      /* Tooltip - Regra 5: Prevenção de erros */
+      .tooltip {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        cursor: help;
+      }
+
+      .tooltip-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        margin-left: 6px;
+      }
+
+      .tooltip-text {
+        visibility: hidden;
+        width: 220px;
+        background-color: var(--tooltip-bg);
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0.5rem;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 0.8rem;
+        font-weight: normal;
+        pointer-events: none;
+      }
+
+      .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--tooltip-bg) transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      /* Keyboard shortcuts help - Regra 2: Atalhos para usuários */
+      .keyboard-shortcuts {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        padding: 1rem;
+        width: 300px;
+        z-index: 100;
+        display: none;
+        border-top: 4px solid var(--primary);
+      }
+
+      .keyboard-shortcuts.active {
+        display: block;
+      }
+
+      .keyboard-shortcuts h3 {
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary);
+      }
+
+      .keyboard-shortcuts-close {
+        cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+      }
+
+      .keyboard-shortcuts-close:hover {
+        opacity: 1;
+      }
+
+      .keyboard-shortcut {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .keyboard-shortcut-keys {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .keyboard-key {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+        height: 24px;
+        background-color: var(--primary-light);
+        border: 1px solid var(--primary);
+        border-radius: 4px;
+        padding: 0 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--primary);
+      }
+
+      /* Help button - Regra 2: Atalhos para usuários */
+      .help-button {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.2s;
+        z-index: 50;
+      }
+
+      .help-button:hover {
+        transform: scale(1.1);
+      }
+
+      /* History Drawer - Regra 6: Fácil reversão de ações */
+      .history-drawer {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 320px;
+        height: 100%;
+        background-color: white;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+        z-index: 200;
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .history-drawer.active {
+        right: 0;
+      }
+
+      .history-drawer-header {
+        padding: 1rem;
+        background-color: var(--primary);
+        color: white;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .history-drawer-title {
+        font-weight: 500;
+      }
+
+      .history-drawer-close {
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+        color: white;
+      }
+
+      .history-drawer-close:hover {
+        opacity: 1;
+      }
+
+      .history-drawer-content {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 1rem;
+      }
+
+      .history-item {
+        padding: 0.75rem;
+        border-radius: 6px;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--primary);
+      }
+
+      .history-item:hover {
+        background-color: var(--primary-light);
+        transform: translateX(-4px);
+      }
+
+      .history-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .history-item-date {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .history-item-plate {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .history-item-thumb {
+        width: 100%;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+      }
+
+      /* Overlay */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 150;
+        display: none;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 1.5rem 0;
+        background: var(--primary);
+        color: white;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header com cores do Mercosul -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <div class="logo-icon">BR</div>
+          <h1>Detecção de Placas Mercosul</h1>
+        </div>
+        <div class="actions">
+          <button class="secondary" id="history-button">
+            <i class="fas fa-history"></i> Histórico
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de status para feedback instantâneo (Regra 3: Feedback informativo) -->
+    <div class="status-bar">
+      <div class="status-bar-container">
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span>Sistema pronto para detecção</span>
+        </div>
+        <div class="version">Versão 1.2.0</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Alerta inicial com instruções (Regra 5: Prevenção de erros) -->
+      <div class="alert-banner alert-info">
+        <div class="alert-banner-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="alert-banner-text">
+          Faça upload de uma imagem contendo placas veiculares para detecção
+          automática. Os formatos aceitos são PNG, JPG e JPEG.
+        </div>
+        <div class="alert-banner-close">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+
+      <!-- Etapas de progresso (Regra 3: Feedback informativo e Regra 4: Diálogos com fim claro) -->
+      <div class="progress-steps">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-text">Upload da imagem</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-text">Processamento</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-text">Detecção</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-text">Resultados</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Painel de upload e configurações -->
+        <div class="upload-panel">
+          <div class="card">
+            <div class="card-header">
+              <span>Upload da Imagem</span>
+              <span class="badge">Passo 1</span>
+            </div>
+            <div class="card-body">
+              <form id="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="upload-button"
+                    >Selecione ou arraste uma imagem:</label
+                  >
+
+                  <!-- Área de upload modificada -->
+                  <div class="file-input-container" id="file-drop-area">
+                    <i class="fas fa-image file-icon"></i>
+                    <div class="file-instructions">
+                      Clique para selecionar ou arraste e solte uma imagem com
+                      placa veicular
+                    </div>
+                    <div class="file-input-wrapper">
+                      <label for="image-upload" class="upload-button">
+                        <i class="fas fa-upload"></i> Selecionar arquivo
+                      </label>
+                      <input
+                        type="file"
+                        id="image-upload"
+                        name="image"
+                        accept=".png,.jpg,.jpeg"
+                        style="display: none"
+                      />
+                    </div>
+                    <img src="" class="file-preview" id="image-preview" />
+                    <div class="file-name" id="file-name"></div>
+                  </div>
+
+                  <div class="file-format-info">
+                    <i class="fas fa-info-circle"></i> Formatos aceitos: PNG,
+                    JPG, JPEG
+                  </div>
+                </div>
+
+                <!-- Opções avançadas de detecção (Regra 7: Suporte ao controle interno) -->
+                <div class="options-container">
+                  <div class="option-group">
+                    <div class="option-group-title">
+                      <span>Opções de Detecção</span>
+                      <div class="tooltip">
+                        <div class="tooltip-icon">?</div>
+                        <span class="tooltip-text"
+                          >Configure os parâmetros para ajustar a sensibilidade
+                          da detecção</span
+                        >
+                      </div>
+                    </div>
+                    <div class="checkbox-container">
+                      <input type="checkbox" id="use-all-methods" checked />
+                      <label for="use-all-methods"
+                        >Usar todos os métodos de processamento</label
+                      >
+                    </div>
+                    <div class="checkbox-container">
+                      <input type="checkbox" id="use-perspective" checked />
+                      <label for="use-perspective"
+                        >Aplicar correção de perspectiva</label
+                      >
+                    </div>
+                    <div class="checkbox-container">
+                      <input type="checkbox" id="use-rotation" checked />
+                      <label for="use-rotation">Testar rotações variadas</label>
+                    </div>
+                    <div class="checkbox-container">
+                      <input type="checkbox" id="use-enhanced" checked />
+                      <label for="use-enhanced">Usar melhoria de imagem</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="button-group">
+                  <button type="submit" id="detect-button" disabled>
+                    <i class="fas fa-search"></i> Detectar Placa
+                  </button>
+                  <button type="button" class="secondary" id="reset-button">
+                    <i class="fas fa-redo"></i> Limpar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Atalhos de teclado (Regra 2: Atalhos para usuários) -->
+          <div class="card">
+            <div class="card-header">
+              <span>Atalhos de Teclado</span>
+              <span class="badge">Rápido Acesso</span>
+            </div>
+            <div class="card-body">
+              <div class="keyboard-shortcut">
+                <span>Selecionar arquivo</span>
+                <div class="keyboard-shortcut-keys">
+                  <span class="keyboard-key">Ctrl</span>
+                  <span class="keyboard-key">O</span>
+                </div>
+              </div>
+              <div class="keyboard-shortcut">
+                <span>Iniciar detecção</span>
+                <div class="keyboard-shortcut-keys">
+                  <span class="keyboard-key">Alt</span>
+                  <span class="keyboard-key">D</span>
+                </div>
+              </div>
+              <div class="keyboard-shortcut">
+                <span>Limpar formulário</span>
+                <div class="keyboard-shortcut-keys">
+                  <span class="keyboard-key">Alt</span>
+                  <span class="keyboard-key">R</span>
+                </div>
+              </div>
+              <div class="keyboard-shortcut">
+                <span>Mostrar histórico</span>
+                <div class="keyboard-shortcut-keys">
+                  <span class="keyboard-key">Alt</span>
+                  <span class="keyboard-key">H</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área de resultados -->
+        <div class="results-area">
+          <!-- Contêiner de carregamento (Regra 3: Feedback informativo) -->
+          <div class="loading-container" id="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">
+              Processando imagem e detectando placas...
+            </div>
+            <div class="loading-progress">
+              <div class="loading-progress-bar"></div>
+            </div>
+          </div>
+
+          <!-- Contêiner de resultados -->
+          <div class="results-container" id="results-container">
+            <div class="card">
+              <div class="card-header">
+                <span>Resultado da Detecção</span>
+                <span class="badge" id="result-status-badge">Status</span>
+              </div>
+              <div class="card-body">
+                <!-- Status da detecção -->
+                <div class="result-status" id="result-status">
+                  Aguardando processamento...
+                </div>
+
+                <!-- Imagem processada -->
+                <div class="result-image-container">
+                  <img src="" class="result-image" id="result-image" />
+                  <div class="image-controls">
+                    <div class="image-control-btn" id="zoom-in">
+                      <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="image-control-btn" id="zoom-out">
+                      <i class="fas fa-search-minus"></i>
+                    </div>
+                    <div class="image-control-btn" id="download-image">
+                      <i class="fas fa-download"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comparação de algoritmos (Exibição de todos os métodos) -->
+                <h3>Comparação de Métodos de Detecção</h3>
+                <div class="algorithm-comparison" id="algorithm-comparison">
+                  <!-- Método Original -->
+                  <div class="algorithm-card">
+                    <div class="algorithm-header">
+                      <div class="algorithm-title">
+                        <span class="method-icon icon-original"></span>
+                        Método Original
+                      </div>
+                    </div>
+                    <div class="algorithm-body">
+                      <div class="mercosul-plate">
+                        <span class="plate-number" id="plate-original"
+                          >ABC1D23</span
+                        >
+                      </div>
+                      <div class="algorithm-confidence">
+                        Confiança: <span id="confidence-original">85%</span>
+                        <div class="confidence-bar">
+                          <div class="confidence-fill" style="width: 85%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Método com Rotação -->
+                  <div class="algorithm-card">
+                    <div class="algorithm-header">
+                      <div class="algorithm-title">
+                        <span class="method-icon icon-rotation"></span>
+                        Método com Rotação
+                      </div>
+                    </div>
+                    <div class="algorithm-body">
+                      <div class="mercosul-plate">
+                        <span class="plate-number" id="plate-rotation"
+                          >ABC1D23</span
+                        >
+                      </div>
+                      <div class="algorithm-confidence">
+                        Confiança: <span id="confidence-rotation">78%</span>
+                        <div class="confidence-bar">
+                          <div class="confidence-fill" style="width: 78%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Método com Perspectiva -->
+                  <div class="algorithm-card">
+                    <div class="algorithm-header">
+                      <div class="algorithm-title">
+                        <span class="method-icon icon-perspective"></span>
+                        Método com Perspectiva
+                      </div>
+                    </div>
+                    <div class="algorithm-body">
+                      <div class="mercosul-plate">
+                        <span class="plate-number" id="plate-perspective"
+                          >ABC1D23</span
+                        >
+                      </div>
+                      <div class="algorithm-confidence">
+                        Confiança: <span id="confidence-perspective">92%</span>
+                        <div class="confidence-bar">
+                          <div class="confidence-fill" style="width: 92%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Método Melhorado -->
+                  <div class="algorithm-card">
+                    <div class="algorithm-header">
+                      <div class="algorithm-title">
+                        <span class="method-icon icon-enhanced"></span>
+                        Método Melhorado
+                      </div>
+                    </div>
+                    <div class="algorithm-body">
+                      <div class="mercosul-plate">
+                        <span class="plate-number" id="plate-enhanced"
+                          >ABC1D23</span
+                        >
+                      </div>
+                      <div class="algorithm-confidence">
+                        Confiança: <span id="confidence-enhanced">88%</span>
+                        <div class="confidence-bar">
+                          <div class="confidence-fill" style="width: 88%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tabela de comparação (Regra 8: Reduzir carga de memória) -->
+                <h3>Comparativo de Desempenho</h3>
+                <div class="comparison-table-container">
+                  <table class="comparison-table">
+                    <thead>
+                      <tr>
+                        <th>Método</th>
+                        <th>Placa Detectada</th>
+                        <th>Confiança</th>
+                        <th>Tempo (ms)</th>
+                      </tr>
+                    </thead>
+                    <tbody id="comparison-table-body">
+                      <tr>
+                        <td>
+                          <span class="method-icon icon-original"></span>
+                          Original
+                        </td>
+                        <td>ABC1D23</td>
+                        <td>85%</td>
+                        <td>156</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="method-icon icon-rotation"></span>
+                          Rotação
+                        </td>
+                        <td>ABC1D23</td>
+                        <td>78%</td>
+                        <td>243</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="method-icon icon-perspective"></span>
+                          Perspectiva
+                        </td>
+                        <td>ABC1D23</td>
+                        <td>92%</td>
+                        <td>312</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="method-icon icon-enhanced"></span>
+                          Melhorado
+                        </td>
+                        <td>ABC1D23</td>
+                        <td>88%</td>
+                        <td>189</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Melhor resultado -->
+                <h3>Melhor Resultado</h3>
+                <div class="plate-item">
+                  <div class="mercosul-plate">
+                    <span class="plate-number" id="best-plate">ABC1D23</span>
+                  </div>
+                  <div class="plate-info">
+                    <div class="plate-confidence-display">
+                      <span class="confidence-text"
+                        >Confiança: <span id="best-confidence">92%</span></span
+                      >
+                      <div class="confidence-bar" style="width: 100px">
+                        <div
+                          class="confidence-fill"
+                          id="best-confidence-bar"
+                          style="width: 92%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="plate-method">
+                      Método: <span id="best-method">Perspectiva</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Botões de ação (Regra 6: Fácil reversão de ações) -->
+                <div class="button-group">
+                  <button class="success" id="accept-button">
+                    <i class="fas fa-check"></i> Aceitar Resultado
+                  </button>
+                  <button class="secondary" id="new-detection-button">
+                    <i class="fas fa-redo"></i> Nova Detecção
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de ajuda (Regra 2: Atalhos para usuários) -->
+    <div class="help-button" id="help-button">
+      <i class="fas fa-question"></i>
+    </div>
+
+    <!-- Painel de atalhos (Regra 2: Atalhos para usuários) -->
+    <div class="keyboard-shortcuts" id="keyboard-shortcuts">
+      <h3>
+        Atalhos de Teclado
+        <span class="keyboard-shortcuts-close">
+          <i class="fas fa-times"></i>
+        </span>
+      </h3>
+      <div class="keyboard-shortcut">
+        <span>Selecionar arquivo</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">Ctrl</span>
+          <span class="keyboard-key">O</span>
+        </div>
+      </div>
+      <div class="keyboard-shortcut">
+        <span>Iniciar detecção</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">Alt</span>
+          <span class="keyboard-key">D</span>
+        </div>
+      </div>
+      <div class="keyboard-shortcut">
+        <span>Limpar formulário</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">Alt</span>
+          <span class="keyboard-key">R</span>
+        </div>
+      </div>
+      <div class="keyboard-shortcut">
+        <span>Ampliar imagem</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">+</span>
+        </div>
+      </div>
+      <div class="keyboard-shortcut">
+        <span>Reduzir imagem</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">-</span>
+        </div>
+      </div>
+      <div class="keyboard-shortcut">
+        <span>Aceitar resultado</span>
+        <div class="keyboard-shortcut-keys">
+          <span class="keyboard-key">Enter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Histórico (Regra 6: Fácil reversão de ações) -->
+    <div class="history-drawer" id="history-drawer">
+      <div class="history-drawer-header">
+        <div class="history-drawer-title">Histórico de Detecções</div>
+        <div class="history-drawer-close" id="close-history">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="history-drawer-content">
+        <!-- Os itens serão adicionados via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Overlay para modal -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div>Sistema de Detecção de Placas Mercosul © 2025 - v1.2.0</div>
+      <div>Flask 2.3.3 | EasyOCR 1.6.2 | OpenCV 4.5.4.60 | Werkzeug 2.3.7</div>
+    </footer>
+
+    <!-- JavaScript para a interface -->
+    <script src="/static/js/main.js"></script>
+
+    <!-- Script para corrigir o problema de upload -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Referências aos elementos
+        const fileInput = document.getElementById("image-upload");
+        const uploadButton = document.querySelector(".upload-button");
+        const fileDropArea = document.getElementById("file-drop-area");
+        const imagePreview = document.getElementById("image-preview");
+        const fileName = document.getElementById("file-name");
+        const detectButton = document.getElementById("detect-button");
+
+        // Garantir que o botão de upload ative o input de arquivo corretamente
+        if (uploadButton) {
+          uploadButton.addEventListener("click", function (e) {
+            console.log("Botão de upload clicado");
+            // Prevenir a propagação do evento para garantir que só o input seja acionado
+            e.stopPropagation();
+          });
+        }
+
+        // Garantir que o clique na área de drop não ative outras funcionalidades
+        if (fileDropArea) {
+          fileDropArea.addEventListener("click", function (e) {
+            // Se o clique não foi no botão de upload
+            if (!e.target.closest(".upload-button")) {
+              console.log("Área de drop clicada");
+              fileInput.click();
+              e.preventDefault();
+            }
+          });
+        }
+
+        // Processar quando um arquivo for selecionado
+        if (fileInput) {
+          fileInput.addEventListener("change", function () {
+            console.log("Arquivo selecionado:", fileInput.files[0]?.name);
+
+            if (fileInput.files.length > 0) {
+              const file = fileInput.files[0];
+
+              // Mostrar o nome do arquivo
+              if (fileName) {
+                fileName.textContent = file.name;
+              }
+
+              // Criar preview
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                if (imagePreview) {
+                  imagePreview.src = e.target.result;
+                  imagePreview.classList.add("active");
+                }
+                if (detectButton) {
+                  detectButton.disabled = false;
+                }
+                if (fileDropArea) {
+                  fileDropArea.classList.add("has-file");
+                }
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+        }
+
+        console.log("Script de correção de upload inicializado");
+      });
+    </script>
+  </body>
+</html>
