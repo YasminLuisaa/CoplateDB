@@ -435,3 +435,8 @@ if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0', port=1000)
     except Exception as e:
         print(f"ERRO ao iniciar o servidor Flask: {str(e)}")
+
+# Configuração para produção (Render)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
