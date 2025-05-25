@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -34,7 +33,7 @@ export function FeatureCard({ icon, title, description }: FeatureCardProps) {
         )}>
           <div className="text-primary">{icon}</div>
         </div>
-        <CardTitle className="transition-colors duration-300">{title}</CardTitle>
+        <CardTitle className="text-blue-800 transition-colors duration-300">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription className="transition-colors duration-300">

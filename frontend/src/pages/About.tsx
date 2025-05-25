@@ -47,28 +47,6 @@ export default function About() {
               title="Sobre o CoPlateDB"
               description="Uma plataforma colaborativa para impulsionar a pesquisa em reconhecimento de placas veiculares."
             />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="animate-fade-in">
-                <h2 className="text-2xl font-bold mb-4">Nossa Missão</h2>
-                <p className="text-muted-foreground mb-4">
-                  O CoPlateDB nasceu da necessidade de um conjunto de dados robusto e diversificado para treinamento de algoritmos de reconhecimento de placas veiculares. Nossa missão é criar um repositório colaborativo e de alta qualidade que respeite rigorosamente as normas de privacidade.
-                </p>
-                <p className="text-muted-foreground mb-4">
-                  Acreditamos que, ao disponibilizar um banco de dados padronizado e anonimizado, podemos acelerar o desenvolvimento de tecnologias de visão computacional mais precisas e confiáveis, beneficiando diversos setores como segurança, gestão de tráfego e cidades inteligentes.
-                </p>
-                <Button asChild className="mt-2 bg-brand-orange hover:bg-orange-600 text-white transition-all">
-                  <Link to="/register">Junte-se ao projeto</Link>
-                </Button>
-              </div>
-              <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" 
-                  alt="CoPlateDB Interface" 
-                  className="rounded-lg shadow-lg w-full max-w-md hover-scale transition-all"
-                />
-              </div>
-            </div>
           </div>
         </section>
 
@@ -93,55 +71,6 @@ export default function About() {
                   <p className="text-muted-foreground">{principle.description}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-50">
-          <div className="container-lg">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold animate-fade-in">Como Funciona</h2>
-              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                Nossa plataforma combina contribuição colaborativa, privacidade rigorosa e processamento avançado.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <Upload className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Contribuição</h3>
-                <p className="text-muted-foreground">
-                  Usuários de diversas regiões contribuem com imagens de placas veiculares através de nossa plataforma intuitiva.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <Lock className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Processamento</h3>
-                <p className="text-muted-foreground">
-                  As imagens são automaticamente anonimizadas e processadas para garantir a conformidade com leis de privacidade.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <ImageIcon className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Utilização</h3>
-                <p className="text-muted-foreground">
-                  Pesquisadores acessam o banco de dados estruturado para treinar e aprimorar algoritmos de reconhecimento.
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-              <Button asChild className="bg-brand-orange hover:bg-orange-600 text-white transition-all">
-                <Link to="/upload">Começar a contribuir</Link>
-              </Button>
             </div>
           </div>
         </section>
