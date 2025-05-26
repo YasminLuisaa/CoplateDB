@@ -1,4 +1,3 @@
-
 import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
@@ -29,12 +28,14 @@ export default function About() {
       description: "Mantemos altos padrões de qualidade por meio de processos de curadoria, validação e classificação rigorosos para todas as imagens."
     }
   ];
-
   const team = [
-    { name: "Ana Silva", role: "Coordenadora de Pesquisa", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Carlos Oliveira", role: "Engenheiro de IA", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Mariana Costa", role: "Cientista de Dados", image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Rafael Santos", role: "Especialista em Privacidade", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
+    { name: "Yasmin L.G. Lourenço", role: "Desenvolvedora Frontend/Backend", image: "/Images/Colab.png" },
+    { name: "Giovanna de O. Pedão", role: "Desenvolvedora Backend", image: "/Images/Colab.png" },
+    { name: "Helen de F. Santos", role: "Orientadora", image: "/Images/Colab.png" },
+    { name: "Lourenço H.N. Pereira", role: "Colaborador de Desenvolvimento", image: "/Images/Colab.png" },
+    { name: "Gustavo de A. Nantes", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
+    { name: "José A.C. Castilho", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
+    { name: "José V. de S. Gomes", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
   ];
 
   return (
@@ -45,7 +46,11 @@ export default function About() {
           <div className="container-lg">
             <PageHeader
               title="Sobre o CoPlateDB"
-              description="Uma plataforma colaborativa para impulsionar a pesquisa em reconhecimento de placas veiculares."
+              description="O CoPlateDB é uma plataforma aberta e colaborativa destinada à criação coletiva de uma extensa base de dados de imagens de placas veiculares. O projeto surge para solucionar a falta de datasets amplos, diversificados e acessíveis, cruciais para o treinamento e avaliação de algoritmos de Inteligência Artificial no Reconhecimento Automático de Placas Veiculares.
+
+A plataforma permite a coleta colaborativa de imagens através de uma interface web intuitiva, com padronização de metadados e rigorosos processos de anonimização em conformidade com a LGPD. Uma funcionalidade central é sua API, que converte imagens de placas para formatos estruturados (JSON), facilitando a integração com sistemas de IA e OCR e democratizando o acesso aos dados. Processos de curadoria e validação garantem a integridade e qualidade do repositório.
+
+O CoPlateDB visa impulsionar a pesquisa científica ao fornecer dados abertos e diversificados, permitindo o desenvolvimento de algoritmos mais robustos. Além disso, tem potencial para aplicações práticas em segurança pública, mobilidade urbana e logística. Inspirado em modelos de Ciência Aberta como ImageNet, o projeto utiliza tecnologias modernas e busca criar um ecossistema sustentável para futuras inovações em Visão Computacional e Inteligência Artificial aplicada à mobilidade urbana."
             />
           </div>
         </section>
@@ -116,6 +121,9 @@ export default function About() {
               </Button>
               <Button size="lg" className="bg-brand-orange hover:bg-orange-600 text-white transition-all" asChild>
                 <Link to="/collection">Explorar a coleção</Link>
+              </Button>
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white transition-all" asChild>
+                <Link to="/contribuir">Contribuir com o banco de dados</Link>
               </Button>
             </div>
           </div>

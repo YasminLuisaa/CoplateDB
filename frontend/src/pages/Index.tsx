@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { FeatureCard } from "@/components/feature-card";
 import { StatsCard } from "@/components/stats-card";
 import { ArrowRight, Upload, Database, Search, Lock, Image, Shield } from "lucide-react";
+import { MercosulPlate } from "@/components/mercosul-plate";
 
 export default function Index() {
   const [stats] = useState({
@@ -26,7 +27,8 @@ export default function Index() {
               </h1><p className="text-lg text-blue-100 mb-8 max-w-xl animate-fade-in" style={{ animationDelay: "0.2s" }}>
                 Colete, gerencie e compartilhe imagens anonimizadas de placas veiculares para impulsionar a pesquisa em inteligência artificial e reconhecimento ótico de caracteres.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>                <Button size="lg" className="bg-blue-500 hover:bg-blue-400 text-white transition-all" asChild>
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>                
+                <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
                   <Link to="/register">
                     Começar agora
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -36,13 +38,8 @@ export default function Index() {
                   <Link to="/about">Saiba mais</Link>
                 </Button>
               </div>
-            </div>
-            <div className="order-1 md:order-2 flex justify-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
-              <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b" 
-                alt="CoPlateDB Interface" 
-                className="rounded-lg shadow-xl w-full max-w-md hover-scale transition-all"
-              />
+            </div>            <div className="order-1 md:order-2 flex justify-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
+              <MercosulPlate text="ABC1D23" />
             </div>
           </div>
         </section>
@@ -93,9 +90,8 @@ export default function Index() {
         rigorosamente as normas de privacidade e impulsione a inovação na área de visão computacional.
       </p>
     </div>
-    <div className="flex justify-center">
-      <img
-        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"    
+    <div className="flex justify-center">      <img
+        src="/Images/mercosul-placas.jpg"    
         alt="Sistema de reconhecimento de placas veiculares com tecnologia AI"
         className="rounded-lg shadow-xl w-full max-w-md hover-scale transition-all"
       />
@@ -151,10 +147,9 @@ export default function Index() {
 
 {/* Nossa Solução section */}
 <section className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
-  <div className="container-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-    <div className="flex justify-center">
+  <div className="container-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">    <div className="flex justify-center">
       <img
-        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+        src="/Images/Colab.png"
         alt="Plataforma colaborativa de dados abertos para IA"
         className="rounded-lg shadow-xl w-full max-w-md hover-scale transition-all"
       />
