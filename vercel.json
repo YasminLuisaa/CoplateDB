@@ -1,5 +1,3 @@
-# Substituir o vercel.json atual
-@"
 {
   "version": 2,
   "builds": [
@@ -9,7 +7,11 @@
     },
     {
       "src": "frontend/package.json",
-      "use": "@vercel/node"
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      }
     }
   ],
   "routes": [
@@ -24,8 +26,5 @@
       "src": "/(.*)",
       "dest": "frontend/index.html"
     }
-  ],
-  "buildCommand": "cd frontend && npm run build",
-  "outputDirectory": "frontend/dist"
+  ]
 }
-"@ > vercel.json
