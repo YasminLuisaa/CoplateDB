@@ -22,7 +22,8 @@ CORS(app, resources={
             "*",
             "https://coplate-db-ifsp.vercel.app",
             "http://localhost:3000",
-            "http://localhost:5173"
+            "http://localhost:5173",
+            "http://192.168.43.1:8081"
         ]
     }
 })
@@ -449,17 +450,16 @@ def check_system():
 
 
 if __name__ == '__main__':
-    print("Iniciando servidor Flask para Render.com...")
-
     # Para Render.com - usar PORT do ambiente
-    port = int(os.environ.get('PORT', 1000))
+    print("Iniciando servidor Flask para Render.com...")
+    port = int(os.environ.get('PORT', 8081))
 
     print(f"Servidor rodando na porta: {port}")
 
     try:
         # Configuração para produção no Render
         app.run(
-            debug=False,  # Desabilitar debug em produção
+            debug=True,  # Enable debug for development
             host='0.0.0.0',
             port=port
         )
