@@ -33,7 +33,11 @@ export default function About() {
     { name: "Yasmin L.G. Lourenço", role: "Desenvolvedora Frontend/Backend", image: "/Images/Colab.png" },
     { name: "Giovanna de O. Pedão", role: "Desenvolvedora Backend", image: "/Images/Colab.png" },
     { name: "Helen de F. Santos", role: "Orientadora", image: "/Images/Colab.png" },
-    { name: "Lourenço H.N. Pereira", role: "Colaborador de Desenvolvimento", image: "/Images/Colab.png" }
+    { name: "Lourenço H.N. Pereira", role: "Colaborador de Desenvolvimento", image: "/Images/Colab.png" },
+    { name: "Gustavo de A. Nantes", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
+    { name: "José A.C. Castilho", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
+    { name: "José V. de S. Gomes", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
+
   ];
 
   return (

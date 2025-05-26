@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,11 +22,16 @@ export default function Login() {
     
     // Simulate login
     setTimeout(() => {
+      // Simular autenticação
+      localStorage.setItem("token", "fake-token");
+      localStorage.setItem("userName", email.split("@")[0]);
+      localStorage.setItem("userEmail", email);
       toast({
         title: "Login simulado",
         description: "Em uma implementação real, você seria autenticado agora.",
       });
       setIsLoading(false);
+      navigate("/upload-contribuicao");
     }, 1000);
   };
 

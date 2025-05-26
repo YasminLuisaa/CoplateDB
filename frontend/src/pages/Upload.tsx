@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -41,6 +40,23 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import apiService, { DetectionResult, ProcessedMethod } from "@/services/api";
+
+// Componente KeyboardShortcut
+const KeyboardShortcut = ({ keys, description }: { keys: string[]; description: string }) => (
+  <div className="flex justify-between items-center py-2">
+    <span className="text-gray-700">{description}</span>
+    <div className="flex gap-1">
+      {keys.map((key, index) => (
+        <span
+          key={index}
+          className="px-2 py-1 bg-blue-100 text-blue-800 rounded border border-blue-200 text-sm font-mono"
+        >
+          {key}
+        </span>
+      ))}
+    </div>
+  </div>
+);
 
 export default function Upload() {
   const [files, setFiles] = useState<File[]>([]);
@@ -130,6 +146,41 @@ export default function Upload() {
     }
   };
 
+  // Event listener para atalhos de teclado
+  const handleKeyboardShortcuts = useCallback((e: KeyboardEvent) => {
+    // Ctrl + O: Selecionar arquivo
+    if (e.ctrlKey && e.key.toLowerCase() === 'o') {
+      e.preventDefault();
+      document.querySelector<HTMLInputElement>('input[type="file"]')?.click();
+    }
+    
+    // Alt + D: Iniciar detecção
+    if (e.altKey && e.key.toLowerCase() === 'd') {
+      e.preventDefault();
+      if (files.length > 0) {
+        handleSubmit(new Event('submit') as any);
+      }
+    }
+    
+    // Alt + R: Limpar formulário
+    if (e.altKey && e.key.toLowerCase() === 'r') {
+      e.preventDefault();
+      setFiles([]);
+      setDetectionResult(null);
+    }
+    
+    // Alt + H: Mostrar histórico
+    if (e.altKey && e.key.toLowerCase() === 'h') {
+      e.preventDefault();
+      setSelectedTab('history');
+    }
+  }, [files, handleSubmit, setDetectionResult, setSelectedTab]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyboardShortcuts);
+    return () => window.removeEventListener('keydown', handleKeyboardShortcuts);
+  }, [handleKeyboardShortcuts]);
+
   // Renderiza os resultados dos métodos
   const renderMethodResults = () => {
     if (!detectionResult) return null;
@@ -188,15 +239,14 @@ export default function Upload() {
     <div className="flex flex-col min-h-screen">
       <MainNav />
       <main className="flex-1 py-8 bg-gray-50">
-        <div className="container-lg">
+        <div className="container mx-auto px-4">
           <PageHeader
             title="Detecção de Placas"
-            description="Envie imagens contendo placas veiculares e utilize nossos algoritmos para detecção."
+            description="Faça o upload de imagens para detectar placas veiculares."
           />
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2">              <Card>
                 <CardHeader>
                   <CardTitle>Carregar Imagem</CardTitle>
                   <CardDescription>
@@ -207,8 +257,8 @@ export default function Upload() {
                   <ImageUpload 
                     onChange={setFiles} 
                     className="mb-6"
-                    value={files}
                     maxFiles={1}
+                    multiple={false}
                   />
                   
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -366,51 +416,18 @@ export default function Upload() {
             <div>
               <Card>
                 <CardHeader>
-                  <CardTitle>Sobre a Detecção</CardTitle>
-                  <CardDescription>
-                    Como funciona o processamento de placas
-                  </CardDescription>
+                  <CardTitle>
+                    <div className="flex items-center justify-between">
+                      <span>Atalhos de Teclado</span>
+                      <span className="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded">Rápido Acesso</span>
+                    </div>
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <p>
-                    Nossa tecnologia combina diferentes métodos de processamento de imagem para obter os melhores resultados na detecção de placas veiculares:
-                  </p>
-                  
-                  <div className="space-y-3">
-                    <div>
-                      <h3 className="font-medium">Original</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Processa a imagem sem modificações, ideal para fotos bem enquadradas.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium">Rotação</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Aplica rotações para corrigir imagens ligeiramente inclinadas.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium">Perspectiva</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Corrige distorções de perspectiva quando a placa está em ângulo.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium">Aprimorado</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Aplica técnicas de realce para melhorar o contraste dos caracteres.
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-muted p-3 rounded-md mt-4">
-                    <p className="text-sm">
-                      <strong>Dica:</strong> Para melhores resultados, utilize imagens bem iluminadas e com a placa bem visível.
-                    </p>
-                  </div>
+                <CardContent className="space-y-2">
+                  <KeyboardShortcut keys={["Ctrl", "O"]} description="Selecionar arquivo" />
+                  <KeyboardShortcut keys={["Alt", "D"]} description="Iniciar detecção" />
+                  <KeyboardShortcut keys={["Alt", "R"]} description="Limpar formulário" />
+                  <KeyboardShortcut keys={["Alt", "H"]} description="Mostrar histórico" />
                 </CardContent>
               </Card>
             </div>

@@ -3,7 +3,7 @@
  */
 
 // URL base da API (pode ser configurada via variável de ambiente no futuro)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:1000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 // Tipos de dados
 export interface ProcessingOptions {

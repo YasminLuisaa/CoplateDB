@@ -9,6 +9,9 @@ import { ArrowRight, Upload, Database, Search, Lock, Image, Shield } from "lucid
 import { MercosulPlate } from "@/components/mercosul-plate";
 
 export default function Index() {
+  // Adicionar log para depuração
+  console.log('Componente Index carregado');
+
   const [stats] = useState({
     images: "12.453",
     users: "345",
@@ -371,7 +374,7 @@ export default function Index() {
       </div>
       
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="text-orange-500 text-2xl mb-4">🔍</div>
+        <div className="text-yellow-500 text-2xl mb-4">🔍</div>
         <h3 className="font-bold text-gray-800 mb-2">API Robusta</h3>
         <p className="text-sm text-muted-foreground">
           Endpoint para converter imagens de placas veiculares em formato JSON estruturado, com documentação completa e controle de acesso.
@@ -407,10 +410,10 @@ export default function Index() {
               Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão computacional e reconhecimento de caracteres.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button size="lg" className="bg-brand-orange hover:bg-orange-600 text-white transition-all" asChild>
+              <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
                 <Link to="/register">Criar uma conta</Link>
               </Button>
-              <Button size="lg" className="bg-brand-orange hover:bg-orange-600 text-white transition-all" asChild>
+              <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
                 <Link to="/login">Entrar na plataforma</Link>
               </Button>
             </div>

@@ -1,89 +1,73 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Upload, Home, User, BookOpen, Info, Search, Database } from 'lucide-react';
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { Logo } from "@/components/logo";
-import { cn } from "@/lib/utils";
-import { title } from "process";
+// Main navigation bar for the app
+const MainNav = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const items = [
-
-
-  { title: "Início", href: "/" },
-  { title: "Coleção", href: "/collection" },
-  { title: "Upload", href: "/upload" },
-  { title: "Dashboard", href: "/dashboard" },
-  { title: "API", href: "/api" },
-  { title: "Sobre", href: "/about" },
-];
-
-export function MainNav({ className }: { className?: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const loggedIn = Boolean(token && token !== 'undefined' && token !== 'null');
+    setIsLoggedIn(loggedIn);
+  }, []);
+  
   return (
-    <div className={cn("bg-white border-b border-gray-100 sticky top-0 z-50", className)}>
-      <div className="container-lg flex justify-between items-center h-16">
-        <Link to="/" className="flex items-center gap-2">
-          <Logo />
+    <nav className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
+      <div className="flex items-center gap-4">
+        <Link to="/" className="text-xl font-bold text-blue-700 flex items-center gap-2">
+          <Home className="w-6 h-6" />
+          CoPlateDB
         </Link>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className="text-muted-foreground font-medium text-sm hover:text-brand-blue transition-colors"
-            >
-              {item.title}
-            </Link>
-          ))}
-          
-          <div className="flex gap-2">
-            <Button variant="outline" asChild>
-              <Link to="/login">Entrar</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/register">Cadastrar</Link>
-            </Button>
-          </div>
-        </nav>
-        
-        {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="sm">
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <div className="flex flex-col gap-6 mt-8">
-              {items.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className="text-foreground font-medium text-lg"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.title}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-3 mt-4">
-                <Button variant="outline" asChild>
-                  <Link to="/login" onClick={() => setIsOpen(false)}>
-                    Entrar
-                  </Link>
-                </Button>
-                <Button asChild onClick={() => setIsOpen(false)}>
-                  <Link to="/register">Cadastrar</Link>
-                </Button>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
       </div>
-    </div>
+      <div className="flex items-center gap-6">
+        <Link to="/" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">Início</Link>
+        <Link to="/api" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Database className="w-4 h-4" />API</Link>        <Link to="/collection" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><BookOpen className="w-4 h-4" />Coleção</Link>
+        <Link to="/upload" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Search className="w-4 h-4" />Detecção</Link>
+        <Link to="/about" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Info className="w-4 h-4" />Sobre</Link>
+        {!isLoggedIn && (
+          <div className="flex gap-2 ml-4">
+            <Link
+              to="/login"
+              className="px-7 py-2 border border-blue-200 rounded-lg font-semibold text-gray-900 bg-white hover:bg-blue-50 transition-colors text-lg shadow-sm"
+              style={{ boxShadow: '0 0 0 1.5px #e0e7ef' }}
+            >
+              Entrar
+            </Link>
+            <Link
+              to="/register"
+              className="px-7 py-2 rounded-lg font-semibold text-white bg-sky-400 hover:bg-sky-500 transition-colors text-lg shadow-sm"
+              style={{ boxShadow: '0 0 0 1.5px #38bdf8' }}
+            >
+              Cadastrar
+            </Link>
+          </div>
+        )}
+        {isLoggedIn && (
+          <>
+            <Link to="/upload-contribuicao" className="flex items-center gap-2 text-gray-700 hover:text-blue-700 font-medium transition-colors">
+              <Upload className="w-5 h-5" />
+              Contribuir
+            </Link>
+            <Link to="/dashboard" className="flex items-center gap-2 text-gray-700 hover:text-blue-700 font-medium transition-colors">
+              <User className="w-5 h-5" />
+              Dashboard
+            </Link>
+            <button
+              onClick={() => {
+                localStorage.removeItem('token');
+                setIsLoggedIn(false);
+              }}
+              className="px-7 py-2 rounded-lg font-semibold text-white bg-blue-500 hover:bg-blue-400 transition-colors text-lg shadow-sm"
+              style={{ boxShadow: '0 0 0 1.5px #f87171' }}
+            >
+              Sair
+            </button>
+          </>
+        )}
+      </div>
+    </nav>
   );
-}
+};
+
+export { MainNav };

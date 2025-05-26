@@ -9,6 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 interface ImageUploadProps {
   className?: string;
   multiple?: boolean;
+  maxFiles?: number;
   onChange?: (files: File[]) => void;
 }
 
