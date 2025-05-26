@@ -6,8 +6,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
+import { title } from "process";
 
 const items = [
+
+
   { title: "Início", href: "/" },
   { title: "Coleção", href: "/collection" },
   { title: "Upload", href: "/upload" },

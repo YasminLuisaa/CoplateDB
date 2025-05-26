@@ -1,4 +1,3 @@
-
 import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
@@ -29,12 +28,14 @@ export default function About() {
       description: "Mantemos altos padrões de qualidade por meio de processos de curadoria, validação e classificação rigorosos para todas as imagens."
     }
   ];
-
   const team = [
-    { name: "Ana Silva", role: "Coordenadora de Pesquisa", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Carlos Oliveira", role: "Engenheiro de IA", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Mariana Costa", role: "Cientista de Dados", image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-    { name: "Rafael Santos", role: "Especialista em Privacidade", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
+    { name: "Yasmin L.G. Lourenço", role: "Desenvolvedora Frontend/Backend", image: "/Images/Colab.png" },
+    { name: "Giovanna de O. Pedão", role: "Desenvolvedora Backend", image: "/Images/Colab.png" },
+    { name: "Helen de F. Santos", role: "Orientadora", image: "/Images/Colab.png" },
+    { name: "Lourenço H.N. Pereira", role: "Colaborador de Desenvolvimento", image: "/Images/Colab.png" },
+    { name: "Gustavo de A. Nantes", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
+    { name: "José A.C. Castilho", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
+    { name: "José V. de S. Gomes", role: "Colaboradores com Feedback", image: "/Images/Colab.png" },
   ];
 
   return (
@@ -45,30 +46,12 @@ export default function About() {
           <div className="container-lg">
             <PageHeader
               title="Sobre o CoPlateDB"
-              description="Uma plataforma colaborativa para impulsionar a pesquisa em reconhecimento de placas veiculares."
-            />
+              description="O CoPlateDB é uma plataforma aberta e colaborativa destinada à criação coletiva de uma extensa base de dados de imagens de placas veiculares. O projeto surge para solucionar a falta de datasets amplos, diversificados e acessíveis, cruciais para o treinamento e avaliação de algoritmos de Inteligência Artificial no Reconhecimento Automático de Placas Veiculares.
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="animate-fade-in">
-                <h2 className="text-2xl font-bold mb-4">Nossa Missão</h2>
-                <p className="text-muted-foreground mb-4">
-                  O CoPlateDB nasceu da necessidade de um conjunto de dados robusto e diversificado para treinamento de algoritmos de reconhecimento de placas veiculares. Nossa missão é criar um repositório colaborativo e de alta qualidade que respeite rigorosamente as normas de privacidade.
-                </p>
-                <p className="text-muted-foreground mb-4">
-                  Acreditamos que, ao disponibilizar um banco de dados padronizado e anonimizado, podemos acelerar o desenvolvimento de tecnologias de visão computacional mais precisas e confiáveis, beneficiando diversos setores como segurança, gestão de tráfego e cidades inteligentes.
-                </p>
-                <Button asChild className="mt-2 bg-brand-orange hover:bg-orange-600 text-white transition-all">
-                  <Link to="/register">Junte-se ao projeto</Link>
-                </Button>
-              </div>
-              <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" 
-                  alt="CoPlateDB Interface" 
-                  className="rounded-lg shadow-lg w-full max-w-md hover-scale transition-all"
-                />
-              </div>
-            </div>
+A plataforma permite a coleta colaborativa de imagens através de uma interface web intuitiva, com padronização de metadados e rigorosos processos de anonimização em conformidade com a LGPD. Uma funcionalidade central é sua API, que converte imagens de placas para formatos estruturados (JSON), facilitando a integração com sistemas de IA e OCR e democratizando o acesso aos dados. Processos de curadoria e validação garantem a integridade e qualidade do repositório.
+
+O CoPlateDB visa impulsionar a pesquisa científica ao fornecer dados abertos e diversificados, permitindo o desenvolvimento de algoritmos mais robustos. Além disso, tem potencial para aplicações práticas em segurança pública, mobilidade urbana e logística. Inspirado em modelos de Ciência Aberta como ImageNet, o projeto utiliza tecnologias modernas e busca criar um ecossistema sustentável para futuras inovações em Visão Computacional e Inteligência Artificial aplicada à mobilidade urbana."
+            />
           </div>
         </section>
 
@@ -93,55 +76,6 @@ export default function About() {
                   <p className="text-muted-foreground">{principle.description}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-50">
-          <div className="container-lg">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold animate-fade-in">Como Funciona</h2>
-              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                Nossa plataforma combina contribuição colaborativa, privacidade rigorosa e processamento avançado.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <Upload className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Contribuição</h3>
-                <p className="text-muted-foreground">
-                  Usuários de diversas regiões contribuem com imagens de placas veiculares através de nossa plataforma intuitiva.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <Lock className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Processamento</h3>
-                <p className="text-muted-foreground">
-                  As imagens são automaticamente anonimizadas e processadas para garantir a conformidade com leis de privacidade.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-all duration-300 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-                <div className="bg-brand-blue/10 p-4 rounded-full inline-block mb-4">
-                  <ImageIcon className="h-6 w-6 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Utilização</h3>
-                <p className="text-muted-foreground">
-                  Pesquisadores acessam o banco de dados estruturado para treinar e aprimorar algoritmos de reconhecimento.
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-              <Button asChild className="bg-brand-orange hover:bg-orange-600 text-white transition-all">
-                <Link to="/upload">Começar a contribuir</Link>
-              </Button>
             </div>
           </div>
         </section>
@@ -187,6 +121,9 @@ export default function About() {
               </Button>
               <Button size="lg" className="bg-brand-orange hover:bg-orange-600 text-white transition-all" asChild>
                 <Link to="/collection">Explorar a coleção</Link>
+              </Button>
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white transition-all" asChild>
+                <Link to="/contribuir">Contribuir com o banco de dados</Link>
               </Button>
             </div>
           </div>

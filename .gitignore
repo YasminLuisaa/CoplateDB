@@ -54,3 +54,4 @@ NTUSER.*
 
 # Ignore pastas específicas que não devem ir pro GitHub
 ../../*
+.vercel
