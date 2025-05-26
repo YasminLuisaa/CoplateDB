@@ -1,0 +1,19 @@
+@"
+node_modules/
+*.log
+.env
+.env.local
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.git/
+backend/venv/
+backend/env/
+*.sqlite
+*.db
+.venv/
+venv/
+new_venv/
+"@ > .vercelignore
