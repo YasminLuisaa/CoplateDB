@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/app.py",
-      "use": "@vercel/python"
-    },
-    {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -16,15 +12,14 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/app.py"
-    },
-    {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
       "dest": "frontend/index.html"
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_URL": "https://your-backend.onrender.com"
+  }
 }
