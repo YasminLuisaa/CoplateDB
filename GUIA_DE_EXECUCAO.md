@@ -1,6 +1,6 @@
 # Guia de Execução do Sistema de Detecção de Placas Mercosul
 
-Este guia fornece instruções passo a passo para configurar e executar o Sistema de Detecção de Placas Mercosul, tanto em ambiente de desenvolvimento quanto em produção.
+Este guia fornece instruções passo a passo para configurar e executar o Sistema de Detecção de Placas Mercosul, tanto em ambiente de desenvolvimento quanto em produção. Teste
 
 ## Pré-requisitos
 
@@ -59,6 +59,7 @@ cd ..
 ```
 
 ## Execução em Ambiente de Desenvolvimento
+
 cd
 Para desenvolvimento, você precisa executar o backend e o frontend em terminais separados.
 
@@ -79,6 +80,7 @@ python app.py
 ```
 
 O backend estará disponível em:
+
 ### Terminal 2: Frontend
 
 ```bash
@@ -166,4 +168,4 @@ npm install
 
 - Use imagens com boa resolução e iluminação
 - Certifique-se de que a placa está visível e em primeiro plano na imagem
-- Verifique se a placa está no padrão Mercosul (formato ABC1D23) 
+- Verifique se a placa está no padrão Mercosul (formato ABC1D23)
