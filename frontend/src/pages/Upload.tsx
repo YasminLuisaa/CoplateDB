@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -427,11 +428,42 @@ export default function Upload() {
                   <KeyboardShortcut keys={["Ctrl", "O"]} description="Selecionar arquivo" />
                   <KeyboardShortcut keys={["Alt", "D"]} description="Iniciar detecção" />
                   <KeyboardShortcut keys={["Alt", "R"]} description="Limpar formulário" />
-                  <KeyboardShortcut keys={["Alt", "H"]} description="Mostrar histórico" />
+                  <KeyboardShortcut keys={["Alt", "H"]} description="Mostrar histórico no Dashboard" />
                 </CardContent>
               </Card>
             </div>
           </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="w-screen mt-20 relative left-[50%] right-[50%] mx-[-50vw]">
+          <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mb-6">
+                Pronto para colaborar?
+              </h2>
+              <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+                Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
+                computacional e reconhecimento de caracteres.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button
+                  size="lg"
+                  className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+                  asChild
+                >
+                  <Link to="/register">Criar Conta</Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+                  asChild
+                >
+                  <Link to="/contribuir">Entrar na plataforma</Link>
+                </Button>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
       <Footer />

@@ -13,6 +13,8 @@ import Api from "./pages/Api";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import UploadContribuicao from "./pages/UploadContribuicao";
+import TeamMemberProfile from "./pages/TeamMemberProfile";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -26,12 +28,14 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/upload" element={<Upload />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/api" element={<Api />} />
           <Route path="/about" element={<About />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route path="/contato" element={<Contact />} />
           <Route path="/upload-contribuicao" element={<UploadContribuicao />} />
+          <Route path="/team/:id" element={<TeamMemberProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

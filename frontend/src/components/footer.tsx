@@ -1,6 +1,6 @@
-
 import React from "react";
 import { Logo } from "@/components/logo";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   return (
@@ -17,20 +17,20 @@ export function Footer() {
           <div>
             <h3 className="font-medium text-lg mb-3">Links</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-muted-foreground hover:text-brand-blue transition-colors">Início</a></li>
-              <li><a href="/collection" className="text-muted-foreground hover:text-brand-blue transition-colors">Coleção</a></li>
-              <li><a href="/upload" className="text-muted-foreground hover:text-brand-blue transition-colors">Upload</a></li>
-              <li><a href="/api" className="text-muted-foreground hover:text-brand-blue transition-colors">API</a></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-brand-blue transition-colors">Início</Link></li>
+              <li><Link to="/collection" className="text-muted-foreground hover:text-brand-blue transition-colors">Coleção</Link></li>
+              <li><Link to="/upload" className="text-muted-foreground hover:text-brand-blue transition-colors">Upload</Link></li>
+              <li><Link to="/api" className="text-muted-foreground hover:text-brand-blue transition-colors">API</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-medium text-lg mb-3">Recursos</h3>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-muted-foreground hover:text-brand-blue transition-colors">Sobre o Projeto</a></li>
-              <li><a href="/privacy" className="text-muted-foreground hover:text-brand-blue transition-colors">Privacidade</a></li>
-              <li><a href="/terms" className="text-muted-foreground hover:text-brand-blue transition-colors">Termos de Uso</a></li>
-              <li><a href="/contact" className="text-muted-foreground hover:text-brand-blue transition-colors">Contato</a></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-brand-blue transition-colors">Sobre o Projeto</Link></li>
+              <li><Link to="/privacy" className="text-muted-foreground hover:text-brand-blue transition-colors">Privacidade</Link></li>
+              <li><Link to="/terms" className="text-muted-foreground hover:text-brand-blue transition-colors">Termos de Uso</Link></li>
+              <li><Link to="/contato" className="text-muted-foreground hover:text-brand-blue transition-colors">Contato</Link></li>
             </ul>
           </div>
         </div>
@@ -38,14 +38,13 @@ export function Footer() {
         <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             &copy; {new Date().getFullYear()} CoPlateDB. Todos os direitos reservados.
-          </p>
-          <div className="flex gap-4">
-            <a href="#" className="text-muted-foreground hover:text-brand-blue transition-colors">
+          </p>          <div className="flex gap-4">
+            <Link to="/privacy" className="text-muted-foreground hover:text-brand-blue transition-colors">
               Política de Privacidade
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-brand-blue transition-colors">
+            </Link>
+            <Link to="/terms" className="text-muted-foreground hover:text-brand-blue transition-colors">
               Termos de Serviço
-            </a>
+            </Link>
           </div>
         </div>
       </div>

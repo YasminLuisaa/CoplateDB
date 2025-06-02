@@ -400,25 +400,34 @@ export default function Index() {
   </div>
 </section>
 
-        {/* CTA section */}
-        <section className="py-16 bg-brand-dark text-white">
-          <div className="container-lg text-center">
-            <h2 className="text-3xl font-bold mb-4 animate-fade-in">
-              Pronto para colaborar?
-            </h2>
-            <p className="text-lg opacity-80 mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão computacional e reconhecimento de caracteres.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
-                <Link to="/register">Criar uma conta</Link>
-              </Button>
-              <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
-                <Link to="/login">Entrar na plataforma</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+{/* Call to Action */}
+  <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+    <div className="container mx-auto px-4 max-w-4xl text-center">
+      <h2 className="text-3xl font-bold mb-6">
+        Pronto para colaborar?
+      </h2>
+      <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+        Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
+        computacional e reconhecimento de caracteres.
+      </p>
+      <div className="flex flex-wrap justify-center gap-4">
+        <Button
+          size="lg"
+          className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+          asChild
+        >
+          <Link to="/register">Criar Conta</Link>
+        </Button>
+        <Button
+          size="lg"
+          className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+          asChild
+        >
+          <Link to="/contribuir">Entrar na plataforma</Link>
+        </Button>
+      </div>
+    </div>
+  </section>
       </main>
       <Footer />
     </div>

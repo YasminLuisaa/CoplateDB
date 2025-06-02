@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Upload, Home, User, BookOpen, Info, Search, Database } from 'lucide-react';
+import { Upload, Home, User, BookOpen, Info, Search, Database, Mail } from 'lucide-react';
 
 // Main navigation bar for the app
 const MainNav = () => {
@@ -25,6 +25,7 @@ const MainNav = () => {
         <Link to="/api" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Database className="w-4 h-4" />API</Link>        <Link to="/collection" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><BookOpen className="w-4 h-4" />Coleção</Link>
         <Link to="/upload" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Search className="w-4 h-4" />Detecção</Link>
         <Link to="/about" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Info className="w-4 h-4" />Sobre</Link>
+        <Link to="/contato" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Mail className="w-4 h-4" />Contato</Link>
         {!isLoggedIn && (
           <div className="flex gap-2 ml-4">
             <Link

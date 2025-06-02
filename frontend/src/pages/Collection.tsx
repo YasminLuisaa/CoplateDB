@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { ImageCard } from "@/components/image-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -186,8 +187,37 @@ export default function Collection() {
             </div>
           )}
         </div>
+{/* Call to Action */}
+  <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+    <div className="container mx-auto px-4 max-w-4xl text-center">
+      <h2 className="text-3xl font-bold mb-6">
+        Pronto para colaborar?
+      </h2>
+      <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+        Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
+        computacional e reconhecimento de caracteres.
+      </p>
+      <div className="flex flex-wrap justify-center gap-4">
+        <Button
+          size="lg"
+          className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+          asChild
+        >
+          <Link to="/register">Criar Conta</Link>
+        </Button>
+        <Button
+          size="lg"
+          className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+          asChild
+        >
+          <Link to="/contribuir">Entrar na plataforma</Link>
+        </Button>
+      </div>
+    </div>
+  </section>
       </main>
       <Footer />
     </div>
+    
   );
 }

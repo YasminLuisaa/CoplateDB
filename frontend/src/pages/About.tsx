@@ -2,8 +2,15 @@ import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
-import { Database, Search, Shield, Lock, Users, Code, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Mail, Database, Shield, Lock, Search, Code, Users, Github } from "lucide-react";
+
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+}
 
 export default function About() {
   const principles = [
@@ -27,23 +34,54 @@ export default function About() {
       title: "Qualidade",
       description: "Mantemos rigorosos processos de curadoria e validação para todas as imagens."
     }
-  ];
-
-  const team = [
-    { name: "Yasmin L.G. Lourenço", role: "Desenvolvedora Frontend/Backend", image: "/Images/Colab.png" },
-    { name: "Giovanna de O. Pedão", role: "Desenvolvedora Backend", image: "/Images/Colab.png" },
-    { name: "Helen de F. Santos", role: "Orientadora", image: "/Images/Colab.png" },
-    { name: "Lourenço H.N. Pereira", role: "Colaborador de Desenvolvimento", image: "/Images/Colab.png" },
-    { name: "Gustavo de A. Nantes", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
-    { name: "José A.C. Castilho", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
-    { name: "José V. de S. Gomes", role: "Colaborador de Feedback", image: "/Images/Colab.png" },
+  ];  const team: TeamMember[] = [
+    { 
+      id: "yasmin-lourenco",
+      name: "Yasmin Luísa Gomes Lourenço",
+      role: "Desenvolvedora Frontend/Backend",
+      image: "/Images/team/yasmin.jpg"
+    },
+    {
+      id: "giovanna-pedao", 
+      name: "Giovanna de Oliveira Pedão",
+      role: "Desenvolvedora Backend",
+      image: "/Images/Colab.png"
+    },
+    {
+      id: "helen-santos",
+      name: "Helen de Freitas Santos",
+      role: "Orientadora",
+      image: "/Images/helen_foto.jpg"
+    },
+    {
+      id: "lourenco-pereira",
+      name: "Lourenço Henrique Nunes Pereira",
+      role: "Colaborador de Desenvolvimento",
+      image: "/Images/Colab.png"
+    },
+    {      id: "gustavo-nantes",
+      name: "Gustavo de Almeida Nantes",
+      role: "Colaborador de Feedback",
+      image: "/Images/Colab.png"
+    },
+    {
+      id: "jose-castilho",
+      name: "José Augusto Carvalho Castilho",
+      role: "Colaborador de Feedback",
+      image: "/Images/Colab.png"
+    },
+    {
+      id: "jose-gomes",
+      name: "José Vitor de Souza Gomes",
+      role: "Colaborador de Feedback",
+      image: "/Images/Colab.png"
+    }
 
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <MainNav />
-      
       <main className="flex-1">
         {/* Header Section */}
         <section className="bg-gradient-to-b from-blue-50 to-white py-20">
@@ -52,7 +90,6 @@ export default function About() {
               title="Sobre o CoPlateDB"
               description="Uma plataforma colaborativa para criação de uma base de dados de placas veiculares, impulsionando pesquisas em Inteligência Artificial e Reconhecimento Automático."
             />
-            
             <div className="mt-8 prose prose-blue max-w-none">
               <p className="text-lg text-gray-700 leading-relaxed">
                 O CoPlateDB surge para resolver a escassez de datasets diversificados e acessíveis na área de reconhecimento de placas veiculares. 
@@ -100,13 +137,12 @@ export default function About() {
             </h2>
             <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
               Profissionais dedicados ao desenvolvimento e evolução do CoPlateDB.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            </p>            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {team.map((member, index) => (
-                <div
+                <Link
                   key={index}
-                  className="bg-white rounded-lg p-6 text-center transition-all duration-300 hover:shadow-lg"
+                  to={`/team/${member.id}`}
+                  className="bg-white rounded-lg p-6 text-center transition-all duration-300 hover:shadow-lg cursor-pointer"
                 >
                   <div className="mb-4">
                     <img
@@ -117,7 +153,7 @@ export default function About() {
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{member.name}</h3>
                   <p className="text-gray-600">{member.role}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -165,7 +201,7 @@ export default function About() {
                   <li className="flex items-start">
                     <span className="text-gray-600">
                       <strong className="text-gray-900 block">Versão:</strong>
-                      1.2.0 (Maio 2025)
+                      1.2.0 (Junho 2025)
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -218,32 +254,31 @@ export default function About() {
         <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-3xl font-bold mb-6">
-              Faça Parte do Projeto
+              Pronto para colaborar?
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Contribua com nossa base de dados e ajude a impulsionar o desenvolvimento 
-              de tecnologias de reconhecimento de placas veiculares.
+              Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
+              computacional e reconhecimento de caracteres.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 transition-all"
+                className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
                 asChild
               >
                 <Link to="/register">Criar Conta</Link>
               </Button>
               <Button
                 size="lg"
-                className="bg-blue-500 text-white hover:bg-blue-400 transition-all"
+                className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
                 asChild
               >
-                <Link to="/contribuir">Contribuir</Link>
+                <Link to="/contribuir">Entrar na plataforma</Link>
               </Button>
             </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );
