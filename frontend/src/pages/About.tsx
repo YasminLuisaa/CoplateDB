@@ -13,6 +13,8 @@ interface TeamMember {
 }
 
 export default function About() {
+  console.log("About page being rendered"); // Debug log
+  
   const principles = [
     {
       icon: <Database className="h-6 w-6" />,
@@ -40,39 +42,37 @@ export default function About() {
       name: "Yasmin Luísa Gomes Lourenço",
       role: "Desenvolvedora Frontend/Backend",
       image: "/Images/team/yasmin.jpg"
-    },
-    {
+    },    {
       id: "giovanna-pedao", 
       name: "Giovanna de Oliveira Pedão",
       role: "Desenvolvedora Backend",
-      image: "/Images/Colab.png"
+      image: "/Images/Giovanna.jpeg"
     },
     {
       id: "helen-santos",
       name: "Helen de Freitas Santos",
       role: "Orientadora",
       image: "/Images/helen_foto.jpg"
-    },
-    {
+    },    {
       id: "lourenco-pereira",
-      name: "Lourenço Henrique Nunes Pereira",
+      name: "Lourenço Henrique Neves Pereira",
       role: "Colaborador de Desenvolvimento",
-      image: "/Images/Colab.png"
+      image: "/Images/lourenço.jpeg"
     },
     {      id: "gustavo-nantes",
-      name: "Gustavo de Almeida Nantes",
+      name: "Gustavo de Assis Nantes",
       role: "Colaborador de Feedback",
       image: "/Images/Colab.png"
     },
     {
       id: "jose-castilho",
-      name: "José Augusto Carvalho Castilho",
+      name: "José Augusto Cenci Castilho",
       role: "Colaborador de Feedback",
       image: "/Images/Colab.png"
     },
     {
       id: "jose-gomes",
-      name: "José Vitor de Souza Gomes",
+      name: "José Victor de Souza Gomes",
       role: "Colaborador de Feedback",
       image: "/Images/Colab.png"
     }
@@ -248,10 +248,8 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+        </section>        {/* Call to Action */}
+        <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-3xl font-bold mb-6">
               Pronto para colaborar?
@@ -259,24 +257,25 @@ export default function About() {
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
               Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
               computacional e reconhecimento de caracteres.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                size="lg"
-                className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
-                asChild
-              >
-                <Link to="/register">Criar Conta</Link>
-              </Button>
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
-                asChild
-              >
-                <Link to="/contribuir">Entrar na plataforma</Link>
-              </Button>
+            </p><div className="flex flex-wrap justify-center gap-4">
+              <Link to="/register">
+                <Button
+                  size="lg"
+                  className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+                >
+                  Criar Conta
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button
+                  size="lg"
+                  className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+                >
+                  Entrar na plataforma
+                </Button>
+              </Link>
             </div>
-          </div>
+            </div>
         </section>
       </main>
       <Footer />

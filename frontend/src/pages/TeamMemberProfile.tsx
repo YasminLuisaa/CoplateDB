@@ -22,10 +22,10 @@ const teamMembers: Record<string, TeamMember> = {
     id: "yasmin-lourenco",
     name: "Yasmin Luísa Gomes Lourenço",
     role: "Desenvolvedora Frontend/Backend",
-    email: "yasmin.lourenco@aluno.ifsp.edu.br",
+    email: "yasmin.luisa@aluno.ifsp.edu.br",
     github: "https://github.com/yasminluisaa",
-    lattes: "http://lattes.cnpq.br/5487921634582471",
-    bio: "Desenvolvedora full-stack apaixonada por criar soluções inovadoras. Especializada em desenvolvimento web com foco em React e Python. Atualmente cursando Engenharia de Computação no IFSP. Possui experiência em desenvolvimento de interfaces modernas e desenvolvimento de APIs RESTful.",
+    lattes: "https://lattes.cnpq.br/9888061274914434",
+    bio: "Sou desenvolvedora full-stack apaixonada por transformar ideias em soluções inovadoras. Atualmente curso Engenharia de Computação no IFSP e também possuo formação técnica em Química, o que ampliou minha visão analítica e atenção aos detalhes. Tenho foco em desenvolvimento web e atuo na criação de interfaces modernas, responsivas e acessíveis, além de desenvolver APIs RESTful eficientes e bem estruturadas.",
     image: "/Images/team/yasmin.jpg"
   },
   "giovanna-pedao": {
@@ -33,10 +33,10 @@ const teamMembers: Record<string, TeamMember> = {
     name: "Giovanna de Oliveira Pedão",
     role: "Desenvolvedora Backend",
     email: "giovanna.pedao@aluno.ifsp.edu.br",
-    github: "https://github.com/giopedao",
-    lattes: "http://lattes.cnpq.br/7845923614582369",
-    bio: "Desenvolvedora backend com experiência em Python e APIs RESTful. Focada em criar soluções eficientes e escaláveis para processamento de imagens e visão computacional. Estudante de Engenharia de Computação no IFSP, com interesse especial em inteligência artificial e aprendizado de máquina.",
-    image: "/Images/Colab.png"
+    github: "https://github.com/G1op",
+    lattes: "http://lattes.cnpq.br/6817273514624848",
+    bio: "Sou estudante do 9º semestre de Engenharia da Computação, com forte interesse na área de desenvolvimento backend. Tenho experiência com C++, Python e bancos de dados relacionais, além de afinidade com lógica de programação, estrutura de dados e arquitetura de sistemas. Busco constantemente aprimorar meus conhecimentos por meio de projetos práticos e estudo contínuo.",
+    image: "/Images/Giovanna.jpeg"
   },
   "helen-santos": {
     id: "helen-santos",
@@ -44,23 +44,23 @@ const teamMembers: Record<string, TeamMember> = {
     role: "Orientadora",
     email: "helen.santos@ifsp.edu.br",
     github: "https://github.com/helensantos",
-    lattes: "http://lattes.cnpq.br/4144138821262560",
+    lattes: "http://lattes.cnpq.br/4144138821262565",
     bio: "Doutorado em Ciência da Computação na Universidade Federal de São Carlos-SP (2019), Mestrado em Ciência da Computação pela Universidade Federal de São Carlos-SP (2009), Graduação em Sistema para Faculdade de Direito de Araraquara (1995), Graduação em Matemática pela Faculdade de Administração de Empresas de Araçatuba (1992), Graduada em Tecnólogo em Processamento de Dados pela Universidade Estadual de Maringá (1985). Realizou Pós-Doutorado na UFSCar (2022-2023) onde trabalhou com a Avaliação de Usabilidade do Software de Gestão Pedagógica e Acadêmica para Cursos baseados em Metodologias Ativas de Aprendizagem. Atua nos seguintes temas: avaliação de usabilidade, ciência cidadã, realidade aumentada e virtual, inteligência artificial, processamento de linguagem natural, aprendizagem de máquina, aplicações web, banco de dados, Oracle e Apex, ambiente de ensino aprendizagem, ensino de programação para crianças, uso de tecnologias de realidade aumentada no ambiente de ensino aprendizagem, participação cidadã, laboratório vivo e compostagem em atuação com a tecnologia.",
     image: "/Images/helen_foto.jpg"
   },
   "lourenco-pereira": {
     id: "lourenco-pereira",
-    name: "Lourenço Henrique Nunes Pereira",
+    name: "Lourenço Henrique Neves Pereira",
     role: "Colaborador de Desenvolvimento",
     email: "lourenco.pereira@aluno.ifsp.edu.br",
     github: "https://github.com/lourencopereira",
     lattes: "http://lattes.cnpq.br/9234567123456789",
-    bio: "Estudante de Engenharia de Computação no IFSP, com foco em desenvolvimento web e visão computacional. Contribuidor ativo em projetos de código aberto, especialmente em frameworks frontend modernos e processamento de imagens. Atualmente trabalhando na implementação de técnicas de reconhecimento de caracteres para placas veiculares.",
-    image: "/Images/Colab.png"
+    bio: "Engenheiro da Computação em formação (IFSP) apaixonado por criar soluções tecnológicas modernas e eficientes. Com experiência no desenvolvimento mobile, web e desktop, atuo na criação de aplicações multiplataforma com foco em arquitetura limpa e boas práticas de código.\n\nAtualmente sou estagiário no Desenvolvimento Mobile na Trovata, onde trabalho constantemente com Kotlin para desenvolvimento de aplicativos multiplataforma, além de atuar em projetos web utilizando React, TypeScript e PHP, e desenvolver aplicações desktop em C#.\n\n💡 Principais Habilidades & Tecnologias:\n\n✅ Desenvolvimento Frontend com React, TypeScript e Vite\n✅ Desenvolvimento Mobile com Kotlin\n✅ Aplicações Web com PHP (Laravel) e JavaScript\n✅ Desenvolvimento Desktop com C#\n✅ Frontend & Backend (Full Stack Developer)\n✅ Experiência com Python e frameworks para análise de dados e IA\n✅ Arquitetura de Software e Padrões de Projeto\n✅ Metodologias Ágeis (Scrum e Kanban)\n✅ Versionamento e Colaboração com Git\n✅ UI/UX Design com Figma",
+    image: "/Images/lourenço.jpeg"
   },
   "gustavo-nantes": {
     id: "gustavo-nantes",
-    name: "Gustavo de Almeida Nantes",
+    name: "Gustavo de Assis Nantes",
     role: "Colaborador de Feedback",
     email: "gustavo.nantes@aluno.ifsp.edu.br",
     github: "https://github.com/gustavonantes",
@@ -70,7 +70,7 @@ const teamMembers: Record<string, TeamMember> = {
   },
   "jose-castilho": {
     id: "jose-castilho",
-    name: "José Augusto Carvalho Castilho",
+    name: "José Augusto Cenci Castilho",
     role: "Colaborador de Feedback",
     email: "jose.castilho@aluno.ifsp.edu.br",
     github: "https://github.com/josecastilho",
@@ -80,7 +80,7 @@ const teamMembers: Record<string, TeamMember> = {
   },
   "jose-gomes": {
     id: "jose-gomes",
-    name: "José Vitor de Souza Gomes",
+    name: "José Victor de Souza Gomes",
     role: "Colaborador de Feedback",
     email: "jose.gomes@aluno.ifsp.edu.br",
     github: "https://github.com/josegomes",

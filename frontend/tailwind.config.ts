@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -8,8 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
-	],
-	prefix: "",
+	],	prefix: "",
 	theme: {
 		container: {
 			center: true,
@@ -17,6 +15,11 @@ export default {
 			screens: {
 				'2xl': '1400px'
 			}
+		},
+		backgroundImage: {
+			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+			'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
 		},
 		extend: {
 			colors: {
@@ -70,6 +73,9 @@ export default {
 					light: '#E0F2FE',
 				},
 			},
+			backgroundImage: theme => ({
+				'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+			}),
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

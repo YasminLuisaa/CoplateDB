@@ -1,0 +1,23 @@
+// filepath: c:\Users\CASA\Documents\CoplateDB_Oficial\frontend\src\App.tsx
+import React from 'react';
+import { Routes, Route } from "react-router-dom";
+import TestePage from "./TestePage";
+
+// Log de depuração para confirmar que o componente App está sendo carregado
+console.log("App.tsx sendo carregado - versão simplificada");
+
+const App = () => {
+  // Log adicional para confirmar execução do componente
+  console.log("Componente App está sendo renderizado");
+
+  return (
+    <div className="app-container" style={{ backgroundColor: 'white', minHeight: '100vh' }}>
+      <Routes>
+        <Route path="/" element={<TestePage />} />
+        <Route path="*" element={<TestePage />} />
+      </Routes>
+    </div>
+  );
+};
+
+export default App;

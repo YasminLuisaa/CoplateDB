@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoPlateDB - Versão Ultraminimalista</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #0EA5E9;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .button {
+            background-color: #0EA5E9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #0C87C2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CoPlateDB</h1>
+            <p>Sistema de Detecção de Placas Mercosul</p>
+        </header>
+        
+        <main>
+            <h2>Aplicação Ultraminimalista</h2>
+            <p>Esta é uma versão extremamente básica da aplicação CoPlateDB, criada para garantir a compatibilidade com todos os navegadores.</p>
+            <p>Se você está vendo esta página, significa que seu navegador está funcionando corretamente com nossa aplicação básica.</p>
+            
+            <div id="app">
+                <p>Carregando conteúdo JavaScript...</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #e9f5fd; border-radius: 5px; border-left: 5px solid #0EA5E9;">
+                <h3>Links úteis:</h3>
+                <p><a href="/" class="button">Aplicação Principal</a></p>
+                <p><a href="/teste_simples.html" class="button">Página de Teste</a></p>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 CoPlateDB</p>
+        </footer>
+    </div>
+
+    <script>
+        // Script básico para verificar se JavaScript está funcionando
+        document.addEventListener('DOMContentLoaded', function() {
+            const appDiv = document.getElementById('app');
+            if (appDiv) {
+                appDiv.innerHTML = `
+                    <div style="padding: 15px; background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px;">
+                        <h3 style="color: #155724;">JavaScript está funcionando!</h3>
+                        <p>Data/hora atual: ${new Date().toLocaleString()}</p>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -26,6 +26,8 @@ import {
 import { Filter, Search } from "lucide-react";
 
 export default function Collection() {
+  console.log("Collection page being rendered"); // Debug log
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   
@@ -101,9 +103,8 @@ export default function Collection() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <MainNav />
-      <main className="flex-1 py-8 bg-gray-50">
-        <div className="container-lg">
+      <MainNav />      <main className="flex-1 py-8 bg-gray-50">
+        <div className="container mx-auto px-4">
           <PageHeader
             title="Coleção de Imagens"
             description="Explore nossa coleção de imagens de placas veiculares anonimizadas."
@@ -188,7 +189,7 @@ export default function Collection() {
           )}
         </div>
 {/* Call to Action */}
-  <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+  <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
     <div className="container mx-auto px-4 max-w-4xl text-center">
       <h2 className="text-3xl font-bold mb-6">
         Pronto para colaborar?
@@ -196,22 +197,23 @@ export default function Collection() {
       <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
         Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
         computacional e reconhecimento de caracteres.
-      </p>
-      <div className="flex flex-wrap justify-center gap-4">
-        <Button
-          size="lg"
-          className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
-          asChild
-        >
-          <Link to="/register">Criar Conta</Link>
-        </Button>
-        <Button
-          size="lg"
-          className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
-          asChild
-        >
-          <Link to="/contribuir">Entrar na plataforma</Link>
-        </Button>
+      </p><div className="flex flex-wrap justify-center gap-4">
+        <Link to="/register">
+          <Button
+            size="lg"
+            className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+          >
+            Criar Conta
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+          >
+            Entrar na plataforma
+          </Button>
+        </Link>
       </div>
     </div>
   </section>

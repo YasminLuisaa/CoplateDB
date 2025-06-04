@@ -21,35 +21,33 @@ export default function Index() {
 
   return (
     <div className="flex flex-col min-h-screen" style={{ backgroundColor: '#eaf2fc' }}>
-      <MainNav />
-      <main className="flex-1">        {/* Hero section */}
+      <MainNav />      <main className="flex-1">        {/* Hero section */}
         <section className="py-16 md:py-24 bg-gradient-to-b from-blue-900 to-blue-800" style={{ backgroundColor: '#1e40af' }}>
-          <div className="container-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-white">
+          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-white">
             <div className="order-2 md:order-1">              <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
                 <span className="title-gradient text-blue-300">Plataforma colaborativa</span> <span className="text-white">para pesquisa em placas veiculares</span>
               </h1><p className="text-lg text-blue-100 mb-8 max-w-xl animate-fade-in" style={{ animationDelay: "0.2s" }}>
                 Colete, gerencie e compartilhe imagens anonimizadas de placas veiculares para impulsionar a pesquisa em inteligência artificial e reconhecimento ótico de caracteres.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>                
-                <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all" asChild>
-                  <Link to="/register">
+              </p>              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>                
+                <Link to="/register">
+                  <Button size="lg" className="bg-yellow-500 hover:bg-blue-400 text-gray-900 transition-all flex items-center">
                     Começar agora
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" className="border-white text-gray-900 hover:bg-blue-300 transition-all" asChild>
-                  <Link to="/about">Saiba mais</Link>
-                </Button>
+                  </Button>
+                </Link>
+                <Link to="/about">
+                  <Button size="lg" variant="outline" className="border-white text-gray-900 hover:bg-blue-300 transition-all">
+                    Saiba mais
+                  </Button>
+                </Link>
               </div>
             </div>            <div className="order-1 md:order-2 flex justify-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
               <MercosulPlate text="ABC1D23" />
             </div>
           </div>
-        </section>
-
-        {/* Stats section */}
+        </section>        {/* Stats section */}
         <section className="py-12" style={{ backgroundColor: '#eaf2fc' }}>
-          <div className="container-lg">
+          <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatsCard
                 title="IMAGENS COLETADAS"
@@ -80,8 +78,8 @@ export default function Index() {
         </section>
 
  {/* Nossa Missão section */}
-<section className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
-  <div className="container-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<section id="missao" className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
+  <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
     <div>
       <h2 className="text-3xl font-bold text-blue-800">Nossa Missão</h2>
       <p className="text-muted-foreground mt-4 max-w-2xl">
@@ -103,8 +101,8 @@ export default function Index() {
 </section>
 
 {/* O Problema que Resolvemos section */}
-<section className="py-16" style={{ backgroundColor: '#f8fafc' }}>
-  <div className="container-lg">
+<section id="problema" className="py-16" style={{ backgroundColor: '#f8fafc' }}>
+  <div className="container mx-auto px-4">
     <div className="text-center mb-12">
       <h2 className="text-3xl font-bold text-blue-800 mb-2">O Problema que Resolvemos</h2>
       <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
@@ -149,8 +147,8 @@ export default function Index() {
 </section>
 
 {/* Nossa Solução section */}
-<section className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
-  <div className="container-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">    <div className="flex justify-center">
+<section id="solucao" className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
+  <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">    <div className="flex justify-center">
       <img
         src="/Images/Colab.png"
         alt="Plataforma colaborativa de dados abertos para IA"
@@ -201,8 +199,8 @@ export default function Index() {
 </section>
 
 {/* Impacto Esperado section */}
-<section className="py-16" style={{ backgroundColor: '#f8fafc' }}>
-  <div className="container-lg text-center">
+<section id="impacto" className="py-16" style={{ backgroundColor: '#f8fafc' }}>
+  <div className="container mx-auto px-4 text-center">
     <h2 className="text-3xl font-bold text-blue-800 mb-2">Impacto Esperado</h2>
     <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
       Ao disponibilizar um banco de dados padronizado, diversificado e eticamente responsável, o CoPlateDB tem potencial para transformar múltiplos setores
@@ -237,8 +235,8 @@ export default function Index() {
 </section>
 
 {/* Como Funciona section */}
-<section className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
-  <div className="container-lg">
+<section id="funcionamento" className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
+  <div className="container mx-auto px-4">
     <div className="text-center mb-12">
       <h2 className="text-3xl font-bold text-blue-800">Como Sua Contribuição Vira Ciência</h2>
       <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
@@ -301,8 +299,8 @@ export default function Index() {
 </section>
 
 {/* Objetivos da Pesquisa section */}
-<section className="py-16" style={{ backgroundColor: '#f8fafc' }}>
-  <div className="container-lg">
+<section id="objetivos" className="py-16" style={{ backgroundColor: '#f8fafc' }}>
+  <div className="container mx-auto px-4">
     <div className="text-center mb-12">
       <h2 className="text-3xl font-bold text-blue-800 mb-2">Objetivos da Pesquisa</h2>
       <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
@@ -339,8 +337,8 @@ export default function Index() {
 </section>
 
 {/* Features section */}
-<section className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
-  <div className="container-lg">
+<section id="recursos" className="py-16" style={{ backgroundColor: '#eaf2fc' }}>
+  <div className="container mx-auto px-4">
     <div className="text-center mb-12">
       <h2 className="text-3xl font-bold text-blue-800">Recursos Principais</h2>
       <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
@@ -401,7 +399,7 @@ export default function Index() {
 </section>
 
 {/* Call to Action */}
-  <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+  <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
     <div className="container mx-auto px-4 max-w-4xl text-center">
       <h2 className="text-3xl font-bold mb-6">
         Pronto para colaborar?
@@ -409,22 +407,23 @@ export default function Index() {
       <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
         Junte-se à nossa comunidade de pesquisadores e contribua para o avanço da visão 
         computacional e reconhecimento de caracteres.
-      </p>
-      <div className="flex flex-wrap justify-center gap-4">
-        <Button
-          size="lg"
-          className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
-          asChild
-        >
-          <Link to="/register">Criar Conta</Link>
-        </Button>
-        <Button
-          size="lg"
-          className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
-          asChild
-        >
-          <Link to="/contribuir">Entrar na plataforma</Link>
-        </Button>
+      </p><div className="flex flex-wrap justify-center gap-4">
+        <Link to="/register">
+          <Button
+            size="lg"
+            className="bg-blue-500 text-white hover:bg-blue-600 transition-all"
+          >
+            Criar Conta
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+          >
+            Entrar na plataforma
+          </Button>
+        </Link>
       </div>
     </div>
   </section>

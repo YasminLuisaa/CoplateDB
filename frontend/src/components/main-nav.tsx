@@ -1,44 +1,82 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Upload, Home, User, BookOpen, Info, Search, Database, Mail } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Upload, Home, User, Mail, Target, AlertTriangle, Lightbulb, Gauge, ActivitySquare, Goal, Blocks } from 'lucide-react';
 
 // Main navigation bar for the app
-const MainNav = () => {
+export const MainNav = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const loggedIn = Boolean(token && token !== 'undefined' && token !== 'null');
     setIsLoggedIn(loggedIn);
   }, []);
-  
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
+    <nav className="bg-background border-b py-4 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <Link to="/" className="text-xl font-bold text-blue-700 flex items-center gap-2">
+        <Link to="/" className="text-xl font-bold text-primary flex items-center gap-2">
           <Home className="w-6 h-6" />
           CoPlateDB
         </Link>
       </div>
       <div className="flex items-center gap-6">
-        <Link to="/" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">Início</Link>
-        <Link to="/api" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Database className="w-4 h-4" />API</Link>        <Link to="/collection" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><BookOpen className="w-4 h-4" />Coleção</Link>
-        <Link to="/upload" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Search className="w-4 h-4" />Detecção</Link>
-        <Link to="/about" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Info className="w-4 h-4" />Sobre</Link>
-        <Link to="/contato" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1"><Mail className="w-4 h-4" />Contato</Link>
+        <button onClick={() => scrollToSection('missao')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Target className="w-4 h-4" />
+          Missão
+        </button>
+        <button onClick={() => scrollToSection('problema')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <AlertTriangle className="w-4 h-4" />
+          Problema
+        </button>
+        <button onClick={() => scrollToSection('solucao')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Lightbulb className="w-4 h-4" />
+          Solução
+        </button>
+        <button onClick={() => scrollToSection('impacto')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Gauge className="w-4 h-4" />
+          Impacto
+        </button>
+        <button onClick={() => scrollToSection('funcionamento')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <ActivitySquare className="w-4 h-4" />
+          Funcionamento
+        </button>
+        <button onClick={() => scrollToSection('objetivos')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Goal className="w-4 h-4" />
+          Objetivos
+        </button>
+        <button onClick={() => scrollToSection('recursos')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Blocks className="w-4 h-4" />
+          Recursos
+        </button>
+        <Link to="/contato" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <Mail className="w-4 h-4" />
+          Contato
+        </Link>
+
         {!isLoggedIn && (
           <div className="flex gap-2 ml-4">
             <Link
               to="/login"
-              className="px-7 py-2 border border-blue-200 rounded-lg font-semibold text-gray-900 bg-white hover:bg-blue-50 transition-colors text-lg shadow-sm"
-              style={{ boxShadow: '0 0 0 1.5px #e0e7ef' }}
+              className="px-7 py-2 border rounded-lg font-semibold text-foreground bg-background hover:bg-accent transition-colors text-lg"
             >
               Entrar
             </Link>
             <Link
               to="/register"
-              className="px-7 py-2 rounded-lg font-semibold text-white bg-sky-400 hover:bg-sky-500 transition-colors text-lg shadow-sm"
-              style={{ boxShadow: '0 0 0 1.5px #38bdf8' }}
+              className="px-7 py-2 rounded-lg font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors text-lg"
             >
               Cadastrar
             </Link>
@@ -67,8 +105,5 @@ const MainNav = () => {
           </>
         )}
       </div>
-    </nav>
-  );
+    </nav>  );
 };
-
-export { MainNav };

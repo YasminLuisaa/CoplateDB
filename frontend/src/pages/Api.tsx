@@ -11,9 +11,8 @@ import { Link } from "react-router-dom";
 export default function Api() {
   return (
     <div className="flex flex-col min-h-screen">
-      <MainNav />
-      <main className="flex-1 py-8 bg-gray-50">
-        <div className="container-lg">
+      <MainNav />      <main className="flex-1 py-8 bg-gray-50">
+        <div className="container mx-auto px-4">
           <PageHeader
             title="Documentação da API"
             description="Integre o CoPlateDB em suas aplicações com nossa API robusta e flexível."
@@ -287,7 +286,7 @@ fileInput.addEventListener('change', async (e) => {
           </div>
         </div>
 {/* Call to Action */}
-  <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+  <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
     <div className="container mx-auto px-4 max-w-4xl text-center">
       <h2 className="text-3xl font-bold mb-6">
         Pronto para colaborar?
@@ -304,13 +303,12 @@ fileInput.addEventListener('change', async (e) => {
         >
           <Link to="/register">Criar Conta</Link>
         </Button>
-        <Button
-          size="lg"
-          className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
-          asChild
-        >
-          <Link to="/contribuir">Entrar na plataforma</Link>
-        </Button>
+        <Button                  size="lg"
+                  className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
+                  asChild
+                >
+                  <Link to="/login">Entrar na plataforma</Link>
+                </Button>
       </div>
     </div>
   </section>

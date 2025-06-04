@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoPlateDB - Demo sem React</title>
+    <style>
+        :root {
+            --primary-color: #0EA5E9;
+            --dark-color: #0C4A6E;
+            --bg-color: #f0f4f8;
+            --text-color: #333;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .hero {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            color: var(--dark-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            margin-right: 2rem;
+        }
+        
+        .footer-section:last-child {
+            margin-right: 0;
+        }
+        
+        .footer-section h4 {
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 2rem 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">CoPlateDB</a>
+            <ul class="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Coleção</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container main-content">
+        <section class="hero">
+            <h1>CoPlateDB - Sistema de Placas Mercosul</h1>
+            <p>Uma plataforma colaborativa para coleta e análise de dados de placas veiculares para fins de pesquisa.</p>
+            <a href="#" class="btn" id="upload-btn">Fazer Upload</a>
+        </section>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>Coleta de Dados</h3>
+                <p>Contribua com nossa base de dados enviando imagens de placas veiculares para fins de pesquisa acadêmica.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Visualização</h3>
+                <p>Acesse dashboards interativos com estatísticas atualizadas sobre os dados coletados.</p>
+            </div>
+            <div class="feature-card">
+                <h3>API Aberta</h3>
+                <p>Integre sua aplicação com nossa API para acessar dados anonimizados para pesquisas e desenvolvimento.</p>
+            </div>
+        </div>
+        
+        <div id="upload-section" style="display: none; background-color: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h2>Upload de Imagem</h2>
+            <p>Selecione uma imagem de placa veicular para contribuir com nossa base de dados.</p>
+            <div style="display: flex; justify-content: center; margin: 2rem 0;">
+                <label for="file-upload" style="display: block; background-color: #f0f4f8; border: 2px dashed #ccc; padding: 2rem; border-radius: 8px; text-align: center; cursor: pointer; width: 100%; max-width: 500px;">
+                    <div id="preview" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <p>Clique ou arraste uma imagem aqui</p>
+                    </div>
+                    <input type="file" id="file-upload" style="display: none;" accept="image/*">
+                </label>
+            </div>
+            <div style="text-align: center;">
+                <button id="submit-upload" class="btn" disabled>Enviar Imagem</button>
+                <button id="cancel-upload" style="background-color: #f8f9fa; color: #666; border: 1px solid #ddd; padding: 0.75rem 1.5rem; border-radius: 4px; margin-left: 1rem; cursor: pointer;">Cancelar</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre</h4>
+                <p>CoPlateDB é uma plataforma para coleta colaborativa de imagens de placas veiculares para fins de pesquisa acadêmica e desenvolvimento de tecnologias de reconhecimento.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li>Email: contato@coplatedb.com</li>
+                    <li>Telefone: (00) 1234-5678</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 CoPlateDB. Todos os direitos reservados.</p>
+            <p><a href="/minimal.html">Versão Mínima</a> | <a href="/">Voltar para React</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadBtn = document.getElementById('upload-btn');
+            const uploadSection = document.getElementById('upload-section');
+            const cancelUpload = document.getElementById('cancel-upload');
+            const fileUpload = document.getElementById('file-upload');
+            const preview = document.getElementById('preview');
+            const submitUpload = document.getElementById('submit-upload');
+            
+            // Exibir seção de upload
+            uploadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                uploadSection.style.display = 'block';
+                uploadSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Cancelar upload
+            cancelUpload.addEventListener('click', function() {
+                uploadSection.style.display = 'none';
+                preview.innerHTML = '<p>Clique ou arraste uma imagem aqui</p>';
+                fileUpload.value = '';
+                submitUpload.disabled = true;
+            });
+            
+            // Pré-visualização de imagem
+            fileUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 300px;">`;
+                        submitUpload.disabled = false;
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Enviar upload (simulado)
+            submitUpload.addEventListener('click', function() {
+                alert('Este é apenas um exemplo! Em uma aplicação real, a imagem seria enviada para processamento.');
+                uploadSection.style.display = 'none';
+                preview.innerHTML = '<p>Clique ou arraste uma imagem aqui</p>';
+                fileUpload.value = '';
+                submitUpload.disabled = true;
+            });
+        });
+    </script>
+</body>
+</html>

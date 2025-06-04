@@ -433,11 +433,9 @@ export default function Upload() {
               </Card>
             </div>
           </div>
-        </div>
-
-        {/* Call to Action */}
+        </div>        {/* Call to Action */}
         <div className="w-screen mt-20 relative left-[50%] right-[50%] mx-[-50vw]">
-          <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
+          <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
             <div className="text-center">
               <h2 className="text-3xl font-bold mb-6">
                 Pronto para colaborar?
@@ -454,12 +452,11 @@ export default function Upload() {
                 >
                   <Link to="/register">Criar Conta</Link>
                 </Button>
-                <Button
-                  size="lg"
+                <Button                  size="lg"
                   className="bg-white text-blue-600 hover:bg-blue-400 transition-all"
                   asChild
                 >
-                  <Link to="/contribuir">Entrar na plataforma</Link>
+                  <Link to="/login">Entrar na plataforma</Link>
                 </Button>
               </div>
             </div>

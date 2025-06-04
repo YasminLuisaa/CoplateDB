@@ -22,10 +22,14 @@ const teamMembers: Record<string, TeamMember> = {
     id: "yasmin-lourenco",
     name: "Yasmin Luísa Gomes Lourenço",
     role: "Desenvolvedora Frontend/Backend",
-    email: "yasmin.lourenco@aluno.ifsp.edu.br",
-    github: "https://github.com/yasminluisaa",
-    lattes: "http://lattes.cnpq.br/1234567890123456",
-    bio: "Desenvolvedora full-stack apaixonada por criar soluções inovadoras. Especializada em desenvolvimento web com foco em React e Python. Atualmente cursando Engenharia de Computação no IFSP. Possui experiência em desenvolvimento de interfaces modernas e desenvolvimento de APIs RESTful.",
+    email: "yasmin.luisa@aluno.ifsp.edu.br",
+    github: "https://github.com/YasminLuisaa",
+    lattes: "https://lattes.cnpq.br/9888061274914434",
+    bio: "Sou desenvolvedora full-stack apaixonada por transformar ideias em soluções inovadoras. 
+    Atualmente curso Engenharia de Computação no IFSP e também possuo formação técnica em Química, o 
+    que ampliou minha visão analítica e atenção aos detalhes. Tenho foco em desenvolvimento web e atuo 
+    na criação de interfaces modernas, 
+    responsivas e acessíveis, além de desenvolver APIs RESTful eficientes e bem estruturadas.",
     image: "/Images/Colab.png"
   },
   "giovanna-pedao": {
@@ -33,8 +37,8 @@ const teamMembers: Record<string, TeamMember> = {
     name: "Giovanna de Oliveira Pedão",
     role: "Desenvolvedora Backend",
     email: "giovanna.pedao@aluno.ifsp.edu.br",
-    github: "https://github.com/giopedao",
-    lattes: "http://lattes.cnpq.br/1234567890123457",
+    github: "https://github.com/G1op",
+    lattes: "http://lattes.cnpq.br/6817273514624848",
     bio: "Desenvolvedora backend com experiência em Python e APIs RESTful. Focada em criar soluções eficientes e escaláveis para processamento de imagens e visão computacional. Estudante de Engenharia de Computação no IFSP, com interesse especial em inteligência artificial e aprendizado de máquina.",
     image: "/Images/Colab.png"
   },
@@ -53,7 +57,7 @@ const teamMembers: Record<string, TeamMember> = {
     name: "Lourenço Hermano Nantes Pereira",
     role: "Colaborador de Desenvolvimento",
     email: "lourenco.pereira@aluno.ifsp.edu.br",
-    github: "https://github.com/lourencopereira",
+    github: "https://github.com/Lourencohn",
     lattes: "http://lattes.cnpq.br/1234567890123458",
     bio: "Estudante de Engenharia de Computação no IFSP, com foco em desenvolvimento web e visão computacional. Contribuidor ativo em projetos de código aberto, especialmente em tecnologias front-end e processamento de imagens. Atualmente trabalha no desenvolvimento de interfaces e implementação de recursos no CoPlateDB.",
     image: "/Images/Colab.png"
@@ -82,7 +86,7 @@ const teamMembers: Record<string, TeamMember> = {
     id: "jose-gomes",
     name: "José Vitor de Souza Gomes",
     role: "Colaborador de Feedback",
-    email: "jose.gomes@aluno.ifsp.edu.br",
+    email: "jose.souza1@aluno.ifsp.edu.br",
     github: "https://github.com/josegomes",
     lattes: "http://lattes.cnpq.br/1234567890123461",
     bio: "Estudante de Engenharia de Computação no IFSP, comprometido com a qualidade de software e experiência do usuário. Especializado em testes de usabilidade e feedback de usuário, contribuindo ativamente para a melhoria contínua da plataforma CoPlateDB. Possui interesse em interfaces intuitivas e acessibilidade digital.",
