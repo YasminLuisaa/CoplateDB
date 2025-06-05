@@ -41,8 +41,8 @@ export default function About() {
       id: "yasmin-lourenco",
       name: "Yasmin Luísa Gomes Lourenço",
       role: "Desenvolvedora Frontend/Backend",
-      image: "/Images/team/yasmin.jpg"
-    },    {
+      image: "/Images/yasmin.jpeg"
+    },{
       id: "giovanna-pedao", 
       name: "Giovanna de Oliveira Pedão",
       role: "Desenvolvedora Backend",
@@ -236,7 +236,7 @@ export default function About() {
                   </li>
                   <li>
                     <a
-                      href="https://github.com/yasminluisaa"
+                      href="https://github.com/coplatedb"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 transition-colors"

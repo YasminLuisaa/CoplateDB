@@ -17,8 +17,7 @@ interface TeamMember {
   image: string;
 }
 
-const teamMembers: Record<string, TeamMember> = {
-  "yasmin-lourenco": {
+const teamMembers: Record<string, TeamMember> = {  "yasmin-lourenco": {
     id: "yasmin-lourenco",
     name: "Yasmin Luísa Gomes Lourenço",
     role: "Desenvolvedora Frontend/Backend",
@@ -30,7 +29,7 @@ const teamMembers: Record<string, TeamMember> = {
     que ampliou minha visão analítica e atenção aos detalhes. Tenho foco em desenvolvimento web e atuo 
     na criação de interfaces modernas, 
     responsivas e acessíveis, além de desenvolver APIs RESTful eficientes e bem estruturadas.",
-    image: "/Images/Colab.png"
+    image: "/Images/yasmin.jpeg"
   },
   "giovanna-pedao": {
     id: "giovanna-pedao",
