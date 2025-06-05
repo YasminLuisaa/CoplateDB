@@ -18,32 +18,32 @@ export function ImageUpload({ className, multiple = true, onChange }: ImageUploa
   const [previews, setPreviews] = useState<string[]>([]);
   const [dragging, setDragging] = useState(false);
   const { toast } = useToast();
-
   const handleFilesChange = useCallback(
     (selectedFiles: FileList | null) => {
       if (!selectedFiles) return;
       
       const fileArray = Array.from(selectedFiles);
-      const imageFiles = fileArray.filter(file => file.type.startsWith('image/'));
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      const validFiles = fileArray.filter(file => allowedTypes.includes(file.type));
       
-      if (fileArray.length !== imageFiles.length) {
+      if (fileArray.length !== validFiles.length) {
         toast({
           title: "Formato inválido",
-          description: "Por favor, selecione apenas arquivos de imagem.",
+          description: "Por favor, selecione apenas arquivos PNG, JPG ou JPEG.",
           variant: "destructive",
         });
       }
       
-      if (!multiple && imageFiles.length > 0) {
-        const singleFile = [imageFiles[0]];
+      if (!multiple && validFiles.length > 0) {
+        const singleFile = [validFiles[0]];
         setFiles(singleFile);
-        setPreviews([URL.createObjectURL(imageFiles[0])]);
+        setPreviews([URL.createObjectURL(validFiles[0])]);
         onChange?.(singleFile);
       } else {
-        setFiles(prev => [...prev, ...imageFiles]);
-        const newPreviews = imageFiles.map(file => URL.createObjectURL(file));
+        setFiles(prev => [...prev, ...validFiles]);
+        const newPreviews = validFiles.map(file => URL.createObjectURL(file));
         setPreviews(prev => [...prev, ...newPreviews]);
-        onChange?.([...files, ...imageFiles]);
+        onChange?.([...files, ...validFiles]);
       }
     },
     [files, multiple, onChange, toast]
@@ -111,16 +111,14 @@ export function ImageUpload({ className, multiple = true, onChange }: ImageUploa
             >
               procure
             </label>
+          </p>          <p className="text-sm text-muted-foreground mt-1">
+            Formatos suportados: PNG, JPG, JPEG (max 10MB)
           </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Formatos suportados: JPG, PNG, GIF (max 10MB)
-          </p>
-        </div>
-        <input
+        </div>        <input
           id="file-upload"
           type="file"
           multiple={multiple}
-          accept="image/*"
+          accept=".png,.jpg,.jpeg,image/png,image/jpeg"
           className="hidden"
           onChange={(e) => handleFilesChange(e.target.files)}
         />

@@ -5,6 +5,7 @@ import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { FeatureCard } from "@/components/feature-card";
 import { StatsCard } from "@/components/stats-card";
+import { DotNavigation } from "@/components/dot-navigation";
 import { ArrowRight, Upload, Database, Search, Lock, Image, Shield } from "lucide-react";
 import { MercosulPlate } from "@/components/mercosul-plate";
 
@@ -17,12 +18,28 @@ export default function Index() {
     users: "345",
     datasets: "28",
     apiCalls: "250K+",
-  });
+  });  // Definir itens de navegação lateral
+  const navigationItems = [
+    { id: 'inicio', label: 'Início' },
+    { id: 'missao', label: 'Missão' },
+    { id: 'problema', label: 'Problema' },
+    { id: 'solucao', label: 'Solução' },
+    { id: 'impacto', label: 'Impacto' },
+    { id: 'funcionamento', label: 'Funcionamento' },
+    { id: 'objetivos', label: 'Objetivos' },
+    { id: 'recursos', label: 'Recursos' },
+    { id: 'colaborar', label: 'Colaborar' },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen" style={{ backgroundColor: '#eaf2fc' }}>
-      <MainNav />      <main className="flex-1">        {/* Hero section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-blue-900 to-blue-800" style={{ backgroundColor: '#1e40af' }}>
+      <MainNav />
+      
+      {/* Dot Navigation */}
+      <DotNavigation items={navigationItems} />
+
+      <main className="flex-1">        {/* Hero section */}
+        <section id="inicio" className="py-16 md:py-24 bg-gradient-to-b from-blue-900 to-blue-800" style={{ backgroundColor: '#1e40af' }}>
           <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-white">
             <div className="order-2 md:order-1">              <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
                 <span className="title-gradient text-blue-300">Plataforma colaborativa</span> <span className="text-white">para pesquisa em placas veiculares</span>
@@ -399,7 +416,7 @@ export default function Index() {
 </section>
 
 {/* Call to Action */}
-  <section className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
+  <section id="colaborar" className="py-20 bg-blue-900 text-white" style={{ backgroundColor: '#1e3a8a' }}>
     <div className="container mx-auto px-4 max-w-4xl text-center">
       <h2 className="text-3xl font-bold mb-6">
         Pronto para colaborar?

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,67 @@ import { ImageUpload } from '@/components/image-upload';
 import { useToast } from '@/components/ui/use-toast';
 import { Textarea } from "@/components/ui/textarea";
 import { Check, Upload } from 'lucide-react';
+
+// Componente de confetes
+const Confetti = () => {
+  const [confettiPieces, setConfettiPieces] = useState<Array<{
+    id: number;
+    left: number;
+    animationDelay: number;
+    animationDuration: number;
+    color: string;
+  }>>([]);
+
+  useEffect(() => {
+    const pieces = Array.from({ length: 50 }, (_, index) => ({
+      id: index,
+      left: Math.random() * 100,
+      animationDelay: Math.random() * 3,
+      animationDuration: Math.random() * 3 + 2,
+      color: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a55eea'][Math.floor(Math.random() * 6)]
+    }));
+    setConfettiPieces(pieces);
+
+    const timer = setTimeout(() => {
+      setConfettiPieces([]);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (confettiPieces.length === 0) return null;
+  return (
+    <>
+      <style>
+        {`
+          @keyframes confetti-fall {
+            0% {
+              transform: translateY(-100vh) rotate(0deg);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(100vh) rotate(720deg);
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
+      <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+        {confettiPieces.map((piece) => (
+          <div
+            key={piece.id}
+            className="absolute w-2 h-2 opacity-80"
+            style={{
+              left: `${piece.left}%`,
+              backgroundColor: piece.color,
+              animation: `confetti-fall ${piece.animationDuration}s ${piece.animationDelay}s linear forwards`,
+            }}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
 
 const UploadContribuicao = () => {
   const navigate = useNavigate();
@@ -26,6 +87,12 @@ const UploadContribuicao = () => {
   const userName = localStorage.getItem('userName') || 'Usuário';
   const userEmail = localStorage.getItem('userEmail') || 'email@exemplo.com';
 
+  // Redirecionar para login se não estiver logado
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login?redirect=/upload-contribuicao');
+    }
+  }, [isLoggedIn, navigate]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (files.length === 0 || !cpf) {
@@ -72,31 +139,13 @@ const UploadContribuicao = () => {
   };
 
   if (!isLoggedIn) {
-    return (
-      <div className="flex flex-col min-h-screen">
-        <MainNav />
-        <main className="flex-1 py-16 flex items-center justify-center bg-gray-50">
-          <Card className="max-w-md w-full mx-4">
-            <CardHeader>
-              <CardTitle>Acesso Restrito</CardTitle>
-              <CardDescription>Faça login para contribuir com imagens.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full" onClick={() => navigate('/login')}>
-                Fazer Login
-              </Button>
-            </CardContent>
-          </Card>
-        </main>
-        <Footer />
-      </div>
-    );
+    return null; // O useEffect já fará o redirecionamento
   }
-
   if (success) {
     return (
       <div className="flex flex-col min-h-screen">
         <MainNav />
+        <Confetti />
         <main className="flex-1 py-16 flex items-center justify-center bg-gray-50">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-6">
@@ -104,14 +153,14 @@ const UploadContribuicao = () => {
                 <Check className="w-8 h-8 text-green-600" />
               </div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">Contribuição Enviada!</h2>
-              <p className="text-gray-600 mb-4">Suas imagens foram enviadas com sucesso e passarão por validação.</p>
+              <p className="text-gray-600 mb-4">Obrigada por ter colaborado com o nosso banco de dados!</p>
               <Button onClick={() => {
                 setSuccess(false);
                 setFiles([]);
                 setCpf('');
                 setObservacoes('');
               }}>
-                Enviar mais imagens
+                Enviar outra imagem
               </Button>
             </CardContent>
           </Card>

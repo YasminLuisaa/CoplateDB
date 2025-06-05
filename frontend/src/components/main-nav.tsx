@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Upload, Home, User, Mail, Target, AlertTriangle, Lightbulb, Gauge, ActivitySquare, Goal, Blocks } from 'lucide-react';
+import { Upload, Home, User, Mail, Target, AlertTriangle, Lightbulb, Gauge, ActivitySquare, Goal, Blocks, HandHeart } from 'lucide-react';
 
 // Main navigation bar for the app
 export const MainNav = () => {
@@ -56,16 +56,14 @@ export const MainNav = () => {
         <button onClick={() => scrollToSection('objetivos')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
           <Goal className="w-4 h-4" />
           Objetivos
-        </button>
-        <button onClick={() => scrollToSection('recursos')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+        </button>        <button onClick={() => scrollToSection('recursos')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
           <Blocks className="w-4 h-4" />
           Recursos
         </button>
-        <Link to="/contato" className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
-          <Mail className="w-4 h-4" />
-          Contato
-        </Link>
-
+        <button onClick={() => scrollToSection('colaborar')} className="text-gray-700 hover:text-blue-700 font-medium transition-colors flex items-center gap-1">
+          <HandHeart className="w-4 h-4" />
+          Contribuir
+        </button>
         {!isLoggedIn && (
           <div className="flex gap-2 ml-4">
             <Link

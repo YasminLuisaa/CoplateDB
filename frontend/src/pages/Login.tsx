@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,11 +28,14 @@ export default function Login() {
       localStorage.setItem("userName", email.split("@")[0]);
       localStorage.setItem("userEmail", email);
       toast({
-        title: "Login simulado",
-        description: "Em uma implementação real, você seria autenticado agora.",
+        title: "Login realizado com sucesso",
+        description: "Bem-vindo de volta!",
       });
       setIsLoading(false);
-      navigate("/upload-contribuicao");
+      
+      // Redirecionar para a página solicitada ou para contribuição
+      const redirectTo = searchParams.get('redirect') || '/upload-contribuicao';
+      navigate(redirectTo);
     }, 1000);
   };
 
